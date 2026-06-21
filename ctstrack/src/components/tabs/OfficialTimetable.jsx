@@ -37,7 +37,7 @@ function getModuleProgressStats(m, linksDone) {
   return { done, total, pct, quizzesDone, quizzesTotal };
 }
 
-export default function OfficialTimetable({ modsDone, toggleModDone, allModuleIds, calDone, calPct, subItemsDone, toggleSubItem, linksDone, toggleLink }) {
+export default function OfficialTimetable({ modsDone, toggleModDone, allModuleIds, calDone, calPct, linksDone, toggleLink }) {
   const [openSub, setOpenSub] = useState({});
   const toggleOpenSub = id => setOpenSub(p => ({ ...p, [id]: !p[id] }));
 

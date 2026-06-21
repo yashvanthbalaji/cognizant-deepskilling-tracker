@@ -1,20 +1,14 @@
 import { useState, useMemo, useEffect } from "react";
-import { WEEKS } from "../data/weeks";
 import { CONSTRUCTS, OFFICIAL_TOTAL } from "../data/constructs";
 import OfficialTimetable from "./tabs/OfficialTimetable";
-import TaskChecklist from "./tabs/TaskChecklist";
 import PdfGuide from "./tabs/PdfGuide";
+import HandBookTab from "./tabs/HandBookTab";
 import GithubTab from "./tabs/GithubTab";
 
 export default function StudyPlan() {
-  const [checked, setChecked] = useState(() => { try { return JSON.parse(localStorage.getItem("dn5_checked")) || {}; } catch(e) { return {}; } });
-  const [openWeeks, setOpenWeeks] = useState(() => { try { return JSON.parse(localStorage.getItem("dn5_openWeeks")) || { 1: true }; } catch(e) { return { 1: true }; } });
-  const [openMods, setOpenMods] = useState({});
   const [tab, setTab] = useState(() => { try { return localStorage.getItem("dn5_tab") || "calendar"; } catch(e) { return "calendar"; } });
   const [modsDone, setModsDone] = useState(() => { try { return JSON.parse(localStorage.getItem("dn5_modsDone")) || {}; } catch(e) { return {}; } });
-  const [subItemsDone, setSubItemsDone] = useState(() => { try { return JSON.parse(localStorage.getItem("dn5_subItemsDone")) || {}; } catch(e) { return {}; } });
   const [linksDone, setLinksDone] = useState(() => { try { return JSON.parse(localStorage.getItem("dn5_linksDone")) || {}; } catch(e) { return {}; } });
-  const toggleSubItem = id => setSubItemsDone(p => ({ ...p, [id]: !p[id] }));
   const toggleLink = id => setLinksDone(p => ({ ...p, [id]: !p[id] }));
 
   const allModuleIds = useMemo(() => CONSTRUCTS.flatMap(c => c.modules.map(m => m.id)), []);
@@ -22,23 +16,7 @@ export default function StudyPlan() {
   const calDone = allModuleIds.filter(id => modsDone[id]).length;
   const calPct = Math.round((calDone / allModuleIds.length) * 100);
 
-  const toggle = id => setChecked(p => ({ ...p, [id]: !p[id] }));
-  const toggleWeek = id => setOpenWeeks(p => ({ ...p, [id]: !p[id] }));
-  const toggleMod = id => setOpenMods(p => ({ ...p, [id]: !p[id] }));
-
-  const allTaskIds = useMemo(() => WEEKS.flatMap(w => w.modules.flatMap(m => m.tasks.map(t => t.id))), []);
-  const done = allTaskIds.filter(id => checked[id]).length;
-  const pct = Math.round((done / allTaskIds.length) * 100);
-
-  const weekStats = useMemo(() => WEEKS.reduce((acc, w) => {
-    const ids = w.modules.flatMap(m => m.tasks.map(t => t.id));
-    const d = ids.filter(id => checked[id]).length;
-    acc[w.id] = { done: d, total: ids.length, pct: ids.length ? Math.round((d / ids.length) * 100) : 0 };
-    return acc;
-  }, {}), [checked]);
-
   // ── Cascading auto-complete: every link in every sub-topic of a module checked → module auto-marked done.
-  // Only applies to modules using the new subTopics (heading+links) shape.
   useEffect(() => {
     const newModsDone = { ...modsDone };
     let changed = false;
@@ -59,12 +37,9 @@ export default function StudyPlan() {
   }, [linksDone]);
 
   // ── Auto-save progress to localStorage ──────────────────────
-  useEffect(() => { localStorage.setItem("dn5_checked",    JSON.stringify(checked));   }, [checked]);
   useEffect(() => { localStorage.setItem("dn5_modsDone",   JSON.stringify(modsDone));  }, [modsDone]);
-  useEffect(() => { localStorage.setItem("dn5_subItemsDone", JSON.stringify(subItemsDone)); }, [subItemsDone]);
-  useEffect(() => { localStorage.setItem("dn5_linksDone", JSON.stringify(linksDone)); }, [linksDone]);
+  useEffect(() => { localStorage.setItem("dn5_linksDone",  JSON.stringify(linksDone)); }, [linksDone]);
   useEffect(() => { localStorage.setItem("dn5_tab",        tab);                       }, [tab]);
-  useEffect(() => { localStorage.setItem("dn5_openWeeks",  JSON.stringify(openWeeks)); }, [openWeeks]);
 
   const tabStyle = active => ({
     padding: "10px 16px", border: "none", background: "none", cursor: "pointer",
@@ -92,7 +67,12 @@ export default function StudyPlan() {
 
           {/* tabs */}
           <div style={{ display: "flex", gap: 0, flexWrap: "wrap" }}>
-            {[["calendar","📅 Official Timetable"],["plan","📋 Task Checklist"],["pdfmap","📘 PDF Guide"],["github","🐙 GitHub"]].map(([id, label]) => (
+            {[
+              ["calendar", "📅 Official Timetable"],
+              ["pdfmap", "📘 PDF Guide"],
+              ["handbook", "📘 HandBook"],
+              ["github", "🐙 GitHub"]
+            ].map(([id, label]) => (
               <button key={id} onClick={() => setTab(id)} style={tabStyle(tab === id)}>{label}</button>
             ))}
           </div>
@@ -108,8 +88,6 @@ export default function StudyPlan() {
             allModuleIds={allModuleIds}
             calDone={calDone}
             calPct={calPct}
-            subItemsDone={subItemsDone}
-            toggleSubItem={toggleSubItem}
             linksDone={linksDone}
             toggleLink={toggleLink}
           />
@@ -119,20 +97,12 @@ export default function StudyPlan() {
           <PdfGuide />
         )}
 
-        {tab === "github" && (
-          <GithubTab />
+        {tab === "handbook" && (
+          <HandBookTab />
         )}
 
-        {tab === "plan" && (
-          <TaskChecklist
-            checked={checked}
-            toggle={toggle}
-            openWeeks={openWeeks}
-            toggleWeek={toggleWeek}
-            openMods={openMods}
-            toggleMod={toggleMod}
-            weekStats={weekStats}
-          />
+        {tab === "github" && (
+          <GithubTab />
         )}
       </div>
     </div>
