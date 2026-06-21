@@ -53,27 +53,42 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
     <div>
       <style>{`
         @keyframes quizFadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(-8px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(-8px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes completionPulse {
+          0%   { background-color: rgba(74, 222, 128, 0.20); }
+          60%  { background-color: rgba(74, 222, 128, 0.09); }
+          100% { background-color: #EFF9F4; }
         }
         .quiz-pulse-glow {
-          box-shadow: 0 2px 4px rgba(251, 191, 36, 0.15);
+          box-shadow: 0 2px 4px rgba(107,91,58,0.10);
           transition: all 0.25s ease-in-out !important;
         }
         .quiz-pulse-glow:hover {
           transform: translateY(-2px);
-          box-shadow: 0 6px 12px rgba(251, 191, 36, 0.3) !important;
-          border-color: #FBBF24 !important;
+          box-shadow: 0 6px 12px rgba(107,91,58,0.18) !important;
+          border-color: #D9CBA8 !important;
+        }
+        .module-row {
+          border: 1px solid transparent;
+          border-bottom-color: #ECEEF1;
+          border-radius: 8px;
+          padding: 14px 8px;
+          transition: border-color 180ms ease, box-shadow 180ms ease, background-color 350ms ease;
+          margin-bottom: 1px;
+        }
+        .module-row:hover {
+          border-color: var(--c-accent);
+          box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .module-row:last-child {
+          border-bottom-color: transparent;
+          margin-bottom: 0;
         }
       `}</style>
 
-      <div style={{ background: "#FEF9C3", border: "1px solid #FDE047", borderRadius: 10, padding: "12px 16px", marginBottom: 14, fontSize: 13, color: "#713F12", lineHeight: 1.5 }}>
+      <div style={{ background: "#F5F0E6", border: "1px solid #D9CBA8", borderRadius: 10, padding: "12px 16px", marginBottom: 14, fontSize: 13, color: "#6B5B3A", lineHeight: 1.5 }}>
         <strong>All details are given by the Cognizant Handbook.</strong> If you have any doubts, you can click the <strong>HandBook</strong> tab to verify with the PDF. No custom instructions are added; everything in this app is designed exactly as per the Handbook's instructions.
       </div>
 
@@ -90,15 +105,15 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
         const isConstructOpen = !!openConstructs[c.id];
 
         return (
-          <div key={c.id} style={{ background: "#fff", borderRadius: 14, border: `1.5px solid ${c.color}30`, marginBottom: 16, overflow: "hidden", transition: "all 0.2s ease" }}>
+          <div key={c.id} style={{ background: "#fff", borderRadius: 14, border: `1.5px solid ${c.color}28`, marginBottom: 20, overflow: "hidden", transition: "all 0.2s ease" }}>
             
             {/* Clickable Construct Header */}
             <div 
               onClick={() => toggleConstruct(c.id)}
               style={{ 
-                background: `${c.color}0D`, 
-                borderBottom: isConstructOpen ? `1px solid ${c.color}20` : "none", 
-                padding: "12px 16px",
+                background: `${c.color}0A`, 
+                borderBottom: isConstructOpen ? `1px solid ${c.color}1A` : "none", 
+                padding: "14px 18px",
                 cursor: "pointer",
                 userSelect: "none"
               }}
@@ -123,7 +138,7 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
 
             {/* Collapsible Construct Body */}
             {isConstructOpen && (
-              <div style={{ padding: "10px 14px" }}>
+              <div style={{ padding: "14px 16px" }}>
                 {c.modules.map(m => {
                   const isDone = !!modsDone[m.id];
                   const isSubOpen = !!openSub[m.id];
@@ -131,7 +146,15 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
                   const stats = getModuleProgressStats(m, linksDone);
 
                   return (
-                    <div key={m.id} style={{ borderBottom: "1px solid #F8FAFC", padding: "12px 6px" }}>
+                    <div
+                      key={m.id}
+                      className="module-row"
+                      style={{
+                        "--c-accent": c.color,
+                        backgroundColor: isDone ? "#EFF9F4" : "transparent",
+                        animation: isDone ? "completionPulse 520ms ease-out forwards" : "none",
+                      }}
+                    >
                       <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
                         <input 
                           type="checkbox" 
@@ -230,7 +253,7 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
                                               target="_blank"
                                               rel="noopener noreferrer"
                                               onClick={e => e.stopPropagation()}
-                                              style={{ fontSize: 11.5, color: lDone ? "#94A3B8" : "#2563EB", textDecoration: lDone ? "line-through" : "underline", lineHeight: 1.5 }}
+                                              style={{ fontSize: 11.5, color: lDone ? "#94A3B8" : "#2C7A7B", textDecoration: lDone ? "line-through" : "underline", lineHeight: 1.5 }}
                                             >
                                               {l.label}
                                             </a>
@@ -254,8 +277,8 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
                               style={{
                                 width: "100%",
                                 textAlign: "left",
-                                border: "1.5px solid #FCD34D",
-                                background: "linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)",
+                                border: "1.5px solid #D9CBA8",
+                                background: "linear-gradient(135deg, #F5F0E6 0%, #EDE7D5 100%)",
                                 borderRadius: 8,
                                 padding: "9px 12px",
                                 cursor: "pointer",
@@ -264,7 +287,7 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
                                 alignItems: "center",
                                 fontWeight: 800,
                                 fontSize: 12,
-                                color: "#B45309",
+                                color: "#6B5B3A",
                                 outline: "none"
                               }}
                             >
@@ -272,7 +295,7 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
                                 📝 <span style={{ textTransform: "uppercase", letterSpacing: 0.5 }}>Check Your Understanding</span>
                               </span>
                               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                                <span style={{ fontSize: 10.5, background: "#FDE68A", padding: "1px 7px", borderRadius: 100 }}>
+                                <span style={{ fontSize: 10.5, background: "#E8DFC8", color: "#6B5B3A", padding: "1px 7px", borderRadius: 100 }}>
                                   {stats.quizzesDone}/{stats.quizzesTotal} Quizzes
                                 </span>
                                 <span>{isQuizOpen ? "▲" : "▼"}</span>
@@ -282,8 +305,8 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
                             {isQuizOpen && (
                               <div 
                                 style={{ 
-                                  background: "#FFFDF5", 
-                                  border: "1px solid #FDE68A", 
+                                  background: "#F5F0E6", 
+                                  border: "1px solid #D9CBA8", 
                                   borderTop: "none", 
                                   borderRadius: "0 0 8px 8px", 
                                   padding: "10px 14px",
@@ -299,14 +322,14 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
                                         type="checkbox" 
                                         checked={qDone} 
                                         onChange={() => toggleLink(q.id)} 
-                                        style={{ width: 13, height: 13, marginTop: 2, cursor: "pointer", accentColor: "#D97706", flexShrink: 0 }} 
+                                        style={{ width: 13, height: 13, marginTop: 2, cursor: "pointer", accentColor: "#6B5B3A", flexShrink: 0 }} 
                                       />
                                       <a
                                         href={q.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         onClick={e => e.stopPropagation()}
-                                        style={{ fontSize: 11.5, color: qDone ? "#94A3B8" : "#B45309", textDecoration: qDone ? "line-through" : "underline", lineHeight: 1.5, fontWeight: 500 }}
+                                        style={{ fontSize: 11.5, color: qDone ? "#94A3B8" : "#6B5B3A", textDecoration: qDone ? "line-through" : "underline", lineHeight: 1.5, fontWeight: 500 }}
                                       >
                                         {q.label}
                                       </a>

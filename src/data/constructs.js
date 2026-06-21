@@ -5,7 +5,7 @@
 
 export const CONSTRUCTS = [
   {
-    id: "C1", color: "#4F46E5",
+    id: "C1", color: "#6366A8",
     name: "Engineering Concepts",
     handbookQuote: "Please plan to complete the skills in 2 days.",
     officialDays: 2, page: "p.7",
@@ -71,7 +71,7 @@ export const CONSTRUCTS = [
     ],
   },
   {
-    id: "C2", color: "#2563EB",
+    id: "C2", color: "#3E7CB1",
     name: "Programming Languages",
     handbookQuote: "Please plan to complete this in 6 days.",
     officialDays: 6, page: "p.10",
@@ -237,7 +237,7 @@ export const CONSTRUCTS = [
     ],
   },
   {
-    id: "C3", color: "#16A34A",
+    id: "C3", color: "#4F9A6E",
     name: "Products and Frameworks",
     handbookQuote: "Please plan to complete this in 4 weeks' time.",
     officialDays: 28, page: "p.14",
@@ -467,7 +467,7 @@ export const CONSTRUCTS = [
     ],
   },
   {
-    id: "C4", color: "#D97706",
+    id: "C4", color: "#C08A3E",
     name: "Platforms",
     handbookQuote: "Please plan to complete this in 1.5 weeks.",
     officialDays: 11, page: "p.21",

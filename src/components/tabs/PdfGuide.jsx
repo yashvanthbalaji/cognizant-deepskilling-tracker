@@ -1,7 +1,7 @@
 export default function PdfGuide() {
   return (
     <div>
-      <div style={{ background: "#FEF9C3", border: "1px solid #FDE047", borderRadius: 10, padding: "12px 16px", marginBottom: 16, fontSize: 13, color: "#713F12" }}>
+      <div style={{ background: "#F5F0E6", border: "1px solid #D9CBA8", borderRadius: 10, padding: "12px 16px", marginBottom: 16, fontSize: 13, color: "#6B5B3A" }}>
         <strong>4 of your 10 modules have a dedicated Hands-On PDF.</strong> The other 6 are GitHub-repo-only or SkillSpring-only (Cognizant's handbook points you to their public repo + SkillSpring courses instead of a PDF for those). The table below tells you exactly which is which — check this BEFORE you start a module so you're not hunting for a PDF that doesn't exist.
       </div>
 
@@ -51,11 +51,11 @@ export default function PdfGuide() {
       </div>
 
       <div style={{ fontSize: 13, fontWeight: 700, color: "#1E293B", marginBottom: 10 }}>📘 Deep Dive — The 4 Modules With a Hands-On PDF</div>
-      <div style={{ background: "#FEF9C3", border: "1px solid #FDE047", borderRadius: 10, padding: "12px 16px", marginBottom: 20, fontSize: 13, color: "#713F12" }}>
+      <div style={{ background: "#F5F0E6", border: "1px solid #D9CBA8", borderRadius: 10, padding: "12px 16px", marginBottom: 20, fontSize: 13, color: "#6B5B3A" }}>
         <strong>You have 4 Hands-On PDFs.</strong> Each maps to exactly one module. The table below shows each PDF's hands-on exercises.
       </div>
       {[
-        { pdf: "DatabaseIntegration_HandsOn.pdf", module: "Module 3 — Database Integration", accent: "#2563EB", dates: "Official: 2 days (handbook) / PDF itself: 4 days", items: [
+        { pdf: "DatabaseIntegration_HandsOn.pdf", module: "Module 3 — Database Integration", accent: "#3E7CB1", dates: "Official: 2 days (handbook) / PDF itself: 4 days", items: [
           ["Hands-On 1","Schema Design & DDL","Beginner"],
           ["Hands-On 2","SQL Queries, JOINs & Aggregations","Beginner"],
           ["Hands-On 3","Advanced SQL — Subqueries, Views, Transactions","Intermediate"],
@@ -64,7 +64,7 @@ export default function PdfGuide() {
           ["Hands-On 6","ORM Integration — SQLAlchemy","Advanced"],
           ["Hands-On 7","Migrations & Versioning — Alembic","Advanced"],
         ]},
-        { pdf: "PythonBackendFrameworks_HandsOn.pdf", module: "Module 5 — Python Backend Frameworks", accent: "#16A34A", dates: "Official: 4 days", items: [
+        { pdf: "PythonBackendFrameworks_HandsOn.pdf", module: "Module 5 — Python Backend Frameworks", accent: "#4F9A6E", dates: "Official: 4 days", items: [
           ["Hands-On 1","Django: Project Setup & Request-Response","Beginner"],
           ["Hands-On 2","Django: Models, ORM & Admin","Beginner"],
           ["Hands-On 3","Django REST Framework — ViewSets & Routers","Beginner"],
@@ -76,7 +76,7 @@ export default function PdfGuide() {
           ["Hands-On 9","JWT Authentication & CORS Security","Advanced"],
           ["Hands-On 10","Microservices Architecture","Advanced"],
         ]},
-        { pdf: "FrontendDevelopment_HandsOn.pdf", module: "Module 6 — Frontend Development", accent: "#9333EA", dates: "Official: 9 days", items: [
+        { pdf: "FrontendDevelopment_HandsOn.pdf", module: "Module 6 — Frontend Development", accent: "#7A5FAF", dates: "Official: 9 days", items: [
           ["Hands-On 1","HTML5 Semantic Structure & CSS3 Foundations","Beginner"],
           ["Hands-On 2","CSS Flexbox, Grid & Responsive Design","Beginner"],
           ["Hands-On 3","JavaScript ES6+ & DOM Manipulation","Beginner"],
@@ -88,7 +88,7 @@ export default function PdfGuide() {
           ["Hands-On 9","Web Accessibility (WCAG 2.1) & A11y","Advanced"],
           ["Hands-On 10","Advanced API Integration & State Management","Advanced"],
         ]},
-        { pdf: "SeleniumBasics_HandsOn.pdf", module: "Module 7 — QA Concepts & Test Automation (Selenium)", accent: "#DC2626", dates: "Official: 6 days (+ SkillSpring 'Selenium Interactive Course')", items: [
+        { pdf: "SeleniumBasics_HandsOn.pdf", module: "Module 7 — QA Concepts & Test Automation (Selenium)", accent: "#A04040", dates: "Official: 6 days (+ SkillSpring 'Selenium Interactive Course')", items: [
           ["Hands-On 1","QA Concepts, Functional Testing & Defect Lifecycle (Written .md)","Beginner"],
           ["Hands-On 2","SDLC vs TDLC — V-Model & Agile QA Integration (Written .md)","Beginner"],
           ["Hands-On 3","Test Automation Process, Lifecycle & Framework Types (Written .md)","Intermediate"],
@@ -105,8 +105,8 @@ export default function PdfGuide() {
             <div style={{ fontSize: 12, color: "#6B7280", marginTop: 2 }}>Use during: <strong>{item.dates}</strong> · {item.items.length} exercises</div>
           </div>
           {item.items.map((ex, i) => {
-            const lvlBg = ex[2] === "Beginner" ? "#D1FAE5" : ex[2] === "Intermediate" ? "#FEF3C7" : "#FEE2E2";
-            const lvlTx = ex[2] === "Beginner" ? "#065F46" : ex[2] === "Intermediate" ? "#92400E" : "#991B1B";
+            const lvlBg = ex[2] === "Beginner" ? "#E0F0E9" : ex[2] === "Intermediate" ? "#ECE8F5" : "#FDEAEA";
+            const lvlTx = ex[2] === "Beginner" ? "#2F6B4A" : ex[2] === "Intermediate" ? "#4A4480" : "#8B2020";
             return (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 16px", borderBottom: i < item.items.length - 1 ? "1px solid #F3F4F6" : "none" }}>
                 <div style={{ width: 26, height: 26, borderRadius: "50%", background: `${item.accent}15`, color: item.accent, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, flexShrink: 0 }}>{i + 1}</div>

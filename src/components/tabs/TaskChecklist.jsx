@@ -13,7 +13,7 @@ export default function TaskChecklist({ checked, toggle, openWeeks, toggleWeek, 
           ["4","Wk 3","Continue 📘 DB PDF → Hands-On 3, 4, 5 (Advanced SQL + MongoDB) + Module 4 Unit Testing","#0891B2"],
           ["5","Wk 4","Finish 📘 DB PDF → Hands-On 6, 7 (ORM + Alembic) + Open 📗 PythonBackendFrameworks_HandsOn.pdf → Hands-On 1, 2","#0D9488"],
           ["6","Wk 5","Continue 📗 Backend PDF → Hands-On 3, 4, 5, 6 (Django REST + Flask + FastAPI)","#16A34A"],
-          ["7","Wk 6","Finish 📗 Backend PDF → Hands-On 7-10 (JWT + Microservices) + Open 📙 FrontendDevelopment_HandsOn.pdf → Hands-On 1-4","#D97706"],
+          ["7","Wk 6","Finish 📗 Backend PDF → Hands-On 7-10 (JWT + Microservices) + Open 📙 FrontendDevelopment_HandsOn.pdf → Hands-On 1-4","#C08A3E"],
           ["8","Wk 7","Finish 📙 Frontend PDF → Hands-On 5-10 (React, Angular, Vue) + Modules 7-10 (QA, Agile, Cloud, GenAI) + KBA Prep","#9333EA"],
         ].map(([n, wk, text, col]) => (
           <div key={n} style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 8 }}>
@@ -127,7 +127,7 @@ export default function TaskChecklist({ checked, toggle, openWeeks, toggleWeek, 
                 <div style={{ marginTop: 10, background: "#EFF6FF", border: "1px solid #BFDBFE", borderRadius: 8, padding: "9px 13px", fontSize: 13, fontWeight: 600, color: "#1E40AF" }}>
                   📤 Week {week.id} GitHub Push: {week.gitPush}
                 </div>
-                <div style={{ marginTop: 7, background: "#FFFBEB", border: "1px solid #FDE68A", borderRadius: 8, padding: "9px 13px", fontSize: 12, color: "#92400E" }}>
+                <div style={{ marginTop: 7, background: "#F5F0E6", border: "1px solid #D9CBA8", borderRadius: 8, padding: "9px 13px", fontSize: 12, color: "#6B5B3A" }}>
                   💡 {week.tip}
                 </div>
               </div>
@@ -137,7 +137,7 @@ export default function TaskChecklist({ checked, toggle, openWeeks, toggleWeek, 
       })}
 
       {/* KBA Footer */}
-      <div style={{ background: "linear-gradient(135deg,#1E3A5F,#7C3AED)", color: "#fff", borderRadius: 14, padding: "20px 20px", textAlign: "center", marginTop: 4 }}>
+      <div style={{ background: "linear-gradient(135deg,#1E2A3A,#2D3F58)", color: "#fff", borderRadius: 14, padding: "20px 20px", textAlign: "center", marginTop: 4 }}>
         <div style={{ fontSize: 26, marginBottom: 6 }}>🎯</div>
         <div style={{ fontSize: 15, fontWeight: 800, marginBottom: 5 }}>After Week 7 — Final KBA Assessment</div>
         <div style={{ fontSize: 12, opacity: 0.8, maxWidth: 500, margin: "0 auto" }}>

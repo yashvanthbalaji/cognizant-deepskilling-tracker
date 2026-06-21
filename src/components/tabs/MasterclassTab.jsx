@@ -268,12 +268,12 @@ export default function MasterclassTab() {
             badgeBg = "#FEE2E2";
             badgeText = "LIVE";
           } else if (timeLeft.days === 0) {
-            badgeColor = "#D97706";
-            badgeBg = "#FEF3C7";
+            badgeColor = "#C08A3E";
+            badgeBg = "#F5EDDC";
             badgeText = `${timeLeft.hours}h left`;
           } else {
-            badgeColor = "#2563EB";
-            badgeBg = "#DBEAFE";
+            badgeColor = "#2C7A7B";
+            badgeBg = "#E0F0F0";
             badgeText = `${timeLeft.days}d left`;
           }
 
@@ -285,7 +285,7 @@ export default function MasterclassTab() {
               style={{
                 flex: "0 0 auto",
                 background: isActive ? "#fff" : "rgba(255, 255, 255, 0.7)",
-                border: isActive ? "2px solid #4F46E5" : "1px solid #E2E8F0",
+                border: isActive ? "2px solid #6366A8" : "1px solid #E2E8F0",
                 borderRadius: 12,
                 padding: "10px 16px",
                 textAlign: "left",
@@ -330,7 +330,7 @@ export default function MasterclassTab() {
       }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12, borderBottom: "1px solid #F1F5F9", paddingBottom: 16, marginBottom: 16 }}>
           <div>
-            <span style={{ fontSize: 11, fontWeight: 700, color: "#4F46E5", textTransform: "uppercase" }}>Masterclass Details</span>
+            <span style={{ fontSize: 11, fontWeight: 700, color: "#6366A8", textTransform: "uppercase" }}>Masterclass Details</span>
             <h2 style={{ fontSize: 20, fontWeight: 800, color: "#0F172A", margin: "2px 0 0" }}>
               {selectedMeeting.week} Masterclass Session
             </h2>
@@ -457,7 +457,7 @@ export default function MasterclassTab() {
                         padding: "8px 6px",
                         textAlign: "center"
                       }}>
-                        <div style={{ fontSize: 24, fontWeight: 800, color: "#4F46E5", fontFamily: "monospace" }}>
+                        <div style={{ fontSize: 24, fontWeight: 800, color: "#6366A8", fontFamily: "monospace" }}>
                           {String(t.value).padStart(2, "0")}
                         </div>
                         <div style={{ fontSize: 9, fontWeight: 700, color: "#64748B", textTransform: "uppercase", marginTop: 2 }}>
