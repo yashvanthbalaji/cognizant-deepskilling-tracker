@@ -264,11 +264,11 @@ export default function OfficialTimetable({ modsDone, toggleModDone, linksDone, 
                                       key={st.id} 
                                       className="subtopic-card"
                                       style={{ 
-                                        background: stDone ? "#F0FDF4" : "#F8FAFC", 
-                                        border: `1px solid ${stDone ? "#BBF7D0" : "#E2E8F0"}` 
+                                        background: stDone ? "#DCFCE7" : "#EEF2F7", 
+                                        border: `1px solid ${stDone ? "#86EFAC" : "#C4C9D4"}`  
                                       }}
                                     >
-                                      <div style={{ fontSize: 11.5, fontWeight: 700, color: stDone ? "#16A34A" : "#334155", marginBottom: 5, display: "flex", alignItems: "center", gap: 5 }}>
+                                      <div style={{ fontSize: 11.5, fontWeight: 700, color: stDone ? "#15803D" : "#1E293B", marginBottom: 5, display: "flex", alignItems: "center", gap: 5 }}>
                                         {stDone ? "✓ " : ""}{st.heading}
                                       </div>
                                       {st.links.map(l => {
@@ -310,8 +310,8 @@ export default function OfficialTimetable({ modsDone, toggleModDone, linksDone, 
                               style={{
                                 width: "100%",
                                 textAlign: "left",
-                                border: "1.5px solid #D9CBA8",
-                                background: "linear-gradient(135deg, #F5F0E6 0%, #EDE7D5 100%)",
+                                border: "1.5px solid #B8A07A",
+                                background: "linear-gradient(135deg, #E8DFCB 0%, #D6C9A8 100%)",
                                 borderRadius: 8,
                                 padding: "9px 12px",
                                 cursor: "pointer",
@@ -320,7 +320,7 @@ export default function OfficialTimetable({ modsDone, toggleModDone, linksDone, 
                                 alignItems: "center",
                                 fontWeight: 800,
                                 fontSize: 12,
-                                color: "#6B5B3A",
+                                color: "#4A3820",
                                 outline: "none"
                               }}
                             >
@@ -328,7 +328,7 @@ export default function OfficialTimetable({ modsDone, toggleModDone, linksDone, 
                                 📝 <span style={{ textTransform: "uppercase", letterSpacing: 0.5 }}>Check Your Understanding</span>
                               </span>
                               <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                                <span style={{ fontSize: 10.5, background: "#E8DFC8", color: "#6B5B3A", padding: "1px 7px", borderRadius: 100 }}>
+                                <span style={{ fontSize: 10.5, background: "#C8B48A", color: "#3B2A10", padding: "1px 7px", borderRadius: 100 }}>
                                   {stats.quizzesDone}/{stats.quizzesTotal} Quizzes
                                 </span>
                                 <span>{isQuizOpen ? "▲" : "▼"}</span>

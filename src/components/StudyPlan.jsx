@@ -277,8 +277,23 @@ export default function StudyPlan() {
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", background: "#F7F6F3", minHeight: "100vh" }}>
       <style>{`
-        .sp-tab-btn { transition: color 0.15s, border-color 0.15s; }
-        .sp-tab-btn:hover { color: #fff !important; }
+        .sp-tab-btn {
+          transition: color 220ms cubic-bezier(0.4,0,0.2,1),
+                      background 220ms cubic-bezier(0.4,0,0.2,1),
+                      border-color 220ms cubic-bezier(0.4,0,0.2,1),
+                      transform 220ms cubic-bezier(0.4,0,0.2,1),
+                      box-shadow 220ms cubic-bezier(0.4,0,0.2,1);
+        }
+        .sp-tab-btn:hover {
+          color: #fff !important;
+          background: rgba(129,140,248,0.13) !important;
+          border-bottom-color: rgba(129,140,248,0.5) !important;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 14px rgba(99,102,241,0.18);
+        }
+        .sp-tab-btn:active {
+          transform: translateY(0);
+        }
         .sp-toolbar-btn { transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1); }
         .sp-toolbar-btn:hover {
           background: rgba(255, 255, 255, 0.08) !important;
@@ -293,23 +308,14 @@ export default function StudyPlan() {
         .sp-avatar-btn:hover { box-shadow: 0 0 0 3px rgba(255,255,255,0.35); }
         .sp-container {
           width: 100%;
-          margin-left: 0;
-          margin-right: auto;
-          padding-left: 24px;
-          padding-right: 24px;
+          padding-left: 20px;
+          padding-right: 20px;
           box-sizing: border-box;
-          max-width: 1400px;
-        }
-        @media (max-width: 1024px) {
-          .sp-container {
-            max-width: 1100px;
-          }
         }
         @media (max-width: 768px) {
           .sp-container {
-            max-width: 100%;
-            padding-left: 16px;
-            padding-right: 16px;
+            padding-left: 14px;
+            padding-right: 14px;
           }
         }
       `}</style>
@@ -666,9 +672,11 @@ export default function StudyPlan() {
                   className="sp-tab-btn"
                   onClick={() => setTab(id)}
                   style={{
+                    flex: 1,
                     padding: "11px 18px",
+                    textAlign: "center",
                     border: "none",
-                    borderBottom: active ? "2px solid #818CF8" : "2px solid transparent",
+                    borderBottom: active ? "2px solid #818CF8" : "2px solid rgba(129,140,248,0.28)",
                     background: "none",
                     cursor: "pointer",
                     fontSize: 12.5,
@@ -689,7 +697,7 @@ export default function StudyPlan() {
       </div>
 
       {/* ── CONTENT AREA ── */}
-      <div className="sp-container" style={{ paddingTop: 24, paddingBottom: 48 }}>
+      <div className="sp-container" style={{ paddingTop: 24, paddingBottom: 48, maxWidth: 1280, margin: "0 auto" }}>
 
         {tab === "calendar" && (
           <OfficialTimetable
