@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { CONSTRUCTS, OFFICIAL_TOTAL } from "../data/constructs";
 import OfficialTimetable from "./tabs/OfficialTimetable";
 import PdfGuide from "./tabs/PdfGuide";
@@ -11,12 +12,72 @@ export default function StudyPlan() {
   const [tab, setTab] = useState(() => { try { return localStorage.getItem("dn5_tab") || "calendar"; } catch(e) { return "calendar"; } });
   const [modsDone, setModsDone] = useState(() => { try { return JSON.parse(localStorage.getItem("dn5_modsDone")) || {}; } catch(e) { return {}; } });
   const [linksDone, setLinksDone] = useState(() => { try { return JSON.parse(localStorage.getItem("dn5_linksDone")) || {}; } catch(e) { return {}; } });
+  const [loadingDb, setLoadingDb] = useState(true);
+  const [syncStatus, setSyncStatus] = useState("synced"); // "synced", "syncing", "error"
   const toggleLink = id => setLinksDone(p => ({ ...p, [id]: !p[id] }));
 
   const allModuleIds = useMemo(() => CONSTRUCTS.flatMap(c => c.modules.map(m => m.id)), []);
   const toggleModDone = id => setModsDone(p => ({ ...p, [id]: !p[id] }));
   const calDone = allModuleIds.filter(id => modsDone[id]).length;
   const calPct = Math.round((calDone / allModuleIds.length) * 100);
+
+  // ── Sync with Cloud Firestore ───────────────────────────────
+  // 1. Fetch user's progress from Firestore on mount
+  useEffect(() => {
+    let active = true;
+    const fetchDbProgress = async () => {
+      const user = auth.currentUser;
+      if (!user) {
+        setLoadingDb(false);
+        return;
+      }
+      try {
+        const docRef = doc(db, "progress", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists() && active) {
+          const data = docSnap.data();
+          setModsDone(data.modsDone || {});
+          setLinksDone(data.linksDone || {});
+        } else if (active) {
+          // If no progress document exists in Firestore, upload the local localStorage progress as initial value.
+          await setDoc(docRef, {
+            modsDone,
+            linksDone,
+            updatedAt: new Date().toISOString()
+          });
+        }
+      } catch (err) {
+        console.error("Firestore progress fetch failed:", err);
+      } finally {
+        if (active) setLoadingDb(false);
+      }
+    };
+    fetchDbProgress();
+    return () => { active = false; };
+  }, []);
+
+  // 2. Save progress to Firestore when local states change
+  useEffect(() => {
+    if (loadingDb) return; // Skip saving until the initial database load is complete
+    const saveDbProgress = async () => {
+      const user = auth.currentUser;
+      if (!user) return;
+      setSyncStatus("syncing");
+      try {
+        const docRef = doc(db, "progress", user.uid);
+        await setDoc(docRef, {
+          modsDone,
+          linksDone,
+          updatedAt: new Date().toISOString()
+        });
+        setSyncStatus("synced");
+      } catch (err) {
+        console.error("Firestore progress save failed:", err);
+        setSyncStatus("error");
+      }
+    };
+    saveDbProgress();
+  }, [modsDone, linksDone, loadingDb]);
 
   // ── Cascading auto-complete: every link in every sub-topic of a module checked → module auto-marked done.
   useEffect(() => {
@@ -61,7 +122,25 @@ export default function StudyPlan() {
               <h1 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 2px", lineHeight: 1.2 }}>Python Full Stack Engineer — 10 Modules, 4 FSE Constructs</h1>
             </div>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 6, flexShrink: 0 }}>
-              <span style={{ fontSize: 11, background: "rgba(255, 255, 255, 0.15)", padding: "4px 10px", borderRadius: 100, fontWeight: 600 }}>👤 {auth.currentUser?.email}</span>
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                {syncStatus === "syncing" && (
+                  <span style={{ fontSize: 10, background: "rgba(245, 158, 11, 0.25)", color: "#FBBF24", padding: "3px 8px", borderRadius: 100, fontWeight: 700, display: "flex", alignItems: "center", gap: 4 }}>
+                    <span style={{ width: 6, height: 6, background: "#FBBF24", borderRadius: "50%", display: "inline-block" }}></span>
+                    Syncing...
+                  </span>
+                )}
+                {syncStatus === "synced" && (
+                  <span style={{ fontSize: 10, background: "rgba(52, 211, 153, 0.2)", color: "#A7F3D0", padding: "3px 8px", borderRadius: 100, fontWeight: 700, display: "flex", alignItems: "center", gap: 4 }}>
+                    <span>☁️</span> Saved
+                  </span>
+                )}
+                {syncStatus === "error" && (
+                  <span style={{ fontSize: 10, background: "rgba(239, 68, 68, 0.25)", color: "#FCA5A5", padding: "3px 8px", borderRadius: 100, fontWeight: 700, display: "flex", alignItems: "center", gap: 4 }}>
+                    <span>⚠️</span> Sync Error
+                  </span>
+                )}
+                <span style={{ fontSize: 11, background: "rgba(255, 255, 255, 0.15)", padding: "4px 10px", borderRadius: 100, fontWeight: 600 }}>👤 {auth.currentUser?.email}</span>
+              </div>
               <button 
                 onClick={() => signOut(auth)} 
                 style={{ fontSize: 11, background: "#EF4444", color: "#fff", border: "none", padding: "5px 12px", borderRadius: 6, fontWeight: 700, cursor: "pointer", transition: "all 0.2s" }}
@@ -83,7 +162,7 @@ export default function StudyPlan() {
           {/* tabs */}
           <div style={{ display: "flex", gap: 0, flexWrap: "wrap" }}>
             {[
-              ["calendar", "📅 Official Timetable"],
+              ["calendar", "📅 Tracker"],
               ["pdfmap", "📘 PDF Guide"],
               ["handbook", "📘 HandBook"],
               ["masterclass", "🎓 Masterclass Session"]

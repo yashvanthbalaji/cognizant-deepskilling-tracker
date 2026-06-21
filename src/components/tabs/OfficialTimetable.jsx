@@ -74,7 +74,7 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
       `}</style>
 
       <div style={{ background: "#FEF9C3", border: "1px solid #FDE047", borderRadius: 10, padding: "12px 16px", marginBottom: 14, fontSize: 13, color: "#713F12", lineHeight: 1.5 }}>
-        <strong>This is structured exactly as Cognizant's handbook structures it</strong> — 4 "FSE constructs," each with its own stated duration. Nothing reordered, invented, or compressed. <strong>Official total: {OFFICIAL_TOTAL} days (~7 weeks)</strong> — the handbook's own "Total Program Duration." Click a link to learn, then check its box — once every link in a sub-topic is checked, the sub-topic auto-completes; once every sub-topic in a module is done, the module auto-completes.
+        <strong>All details are given by the Cognizant Handbook.</strong> If you have any doubts, you can click the <strong>HandBook</strong> tab to verify with the PDF. No custom instructions are added; everything in this app is designed exactly as per the Handbook's instructions.
       </div>
 
       <div style={{ marginBottom: 18 }}>
