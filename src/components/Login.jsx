@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
 export default function Login() {
@@ -8,6 +8,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,14 +20,28 @@ export default function Login() {
     setLoading(true);
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      if (isSignUp) {
+        await createUserWithEmailAndPassword(auth, email, password);
+      } else {
+        await signInWithEmailAndPassword(auth, email, password);
+      }
     } catch (err) {
       console.error(err);
       let errMsg = "Authentication failed. Please try again.";
-      if (err.code === "auth/user-not-found" || err.code === "auth/wrong-password" || err.code === "auth/invalid-credential") {
-        errMsg = "Invalid email or password.";
-      } else if (err.code === "auth/invalid-email") {
-        errMsg = "Please enter a valid email address.";
+      if (isSignUp) {
+        if (err.code === "auth/email-already-in-use") {
+          errMsg = "This email is already registered. Please sign in instead.";
+        } else if (err.code === "auth/weak-password") {
+          errMsg = "Password should be at least 6 characters.";
+        } else if (err.code === "auth/invalid-email") {
+          errMsg = "Please enter a valid email address.";
+        }
+      } else {
+        if (err.code === "auth/user-not-found" || err.code === "auth/wrong-password" || err.code === "auth/invalid-credential") {
+          errMsg = "Invalid email or password.";
+        } else if (err.code === "auth/invalid-email") {
+          errMsg = "Please enter a valid email address.";
+        }
       }
       setError(errMsg);
     } finally {
@@ -224,15 +239,15 @@ export default function Login() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN — Sign-in Action */}
+        {/* RIGHT COLUMN — Sign-in / Sign-up Action */}
         <div className="right-col">
           <div style={{ width: "100%", maxWidth: 360 }}>
             <div style={{ textAlign: "center", marginBottom: 28 }}>
               <h2 style={{ fontSize: 24, fontWeight: 800, color: "#0F172A", margin: "0 0 6px" }}>
-                Sign in to CTSTrack
+                {isSignUp ? "Register for CTSTrack" : "Sign in to CTSTrack"}
               </h2>
               <p style={{ fontSize: 13, color: "#475569", margin: 0 }}>
-                Cognizant Digital Nurture 5.0 · Python FSE Tracker
+                {isSignUp ? "Create a new account for Digital Nurture 5.0" : "Cognizant Digital Nurture 5.0 · Python FSE Tracker"}
               </p>
             </div>
 
@@ -329,13 +344,35 @@ export default function Login() {
                 {loading ? (
                   <>
                     <div style={{ width: 16, height: 16, border: "2px solid rgba(255,255,255,0.2)", borderTop: "2px solid #fff", borderRadius: "50%", animation: "spin 0.6s linear infinite" }} />
-                    Signing in...
+                    {isSignUp ? "Registering..." : "Signing in..."}
                   </>
                 ) : (
-                  "Sign In"
+                  isSignUp ? "Register & Sign Up" : "Sign In"
                 )}
               </button>
             </form>
+
+            <div style={{ marginTop: 24, textAlign: "center", fontSize: 13, color: "#64748B" }}>
+              {isSignUp ? "Already have an account?" : "New to CTSTrack?"}{" "}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsSignUp(!isSignUp);
+                  setError("");
+                }}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#4F46E5",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  padding: 0,
+                  textDecoration: "underline"
+                }}
+              >
+                {isSignUp ? "Sign In" : "Register / Create Account"}
+              </button>
+            </div>
 
             <p style={{ fontSize: 11.5, color: "#64748B", lineHeight: 1.5, marginTop: 24, textAlign: "center" }}>
               Your progress is saved to your account and syncs across devices.

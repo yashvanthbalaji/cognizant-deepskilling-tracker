@@ -569,14 +569,14 @@ export default function StudyPlan() {
                     outline: "none",
                   }}
                 >
-                  🧘 {focusActive ? `${formatFocusTime(focusTimeLeft)}` : "FocusmMode"}
+                  🧘 {focusActive ? `${formatFocusTime(focusTimeLeft)}` : "Focus Mode"}
                 </button>
 
                 {showFocusTimer && (
                   <div style={{
                     position: "absolute",
                     top: "calc(100% + 8px)",
-                    left: 0,
+                    right: 0,
                     background: "#fff",
                     color: "#1E293B",
                     borderRadius: 12,
