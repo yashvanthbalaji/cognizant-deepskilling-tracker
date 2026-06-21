@@ -70,7 +70,17 @@ export default function TaskChecklist({ checked, toggle, openWeeks, toggleWeek, 
                           <div style={{ fontSize: 13, fontWeight: 700, color: allModDone ? "#16A34A" : "#0F172A", textDecoration: allModDone ? "line-through" : "none", lineHeight: 1.3 }}>{allModDone ? "✓ " : ""}{mod.name}</div>
                           <div style={{ display: "flex", gap: 5, marginTop: 5, flexWrap: "wrap" }}>
                             <span style={{ fontSize: 10, fontWeight: 700, padding: "2px 7px", borderRadius: 100, background: lvlBg, color: lvlTx }}>{mod.level}</span>
-                            <span style={{ fontSize: 10, padding: "2px 7px", borderRadius: 100, background: "#F1F5F9", color: "#475569" }}>{mod.pdfLabel}</span>
+                            {mod.id.startsWith("M3") || mod.id.startsWith("M5") || mod.id.startsWith("M6") || mod.id === "M7891011" ? (
+                              <>
+                                <span style={{ fontSize: 10, fontWeight: 700, padding: "2px 7px", borderRadius: 100, background: "#DBEAFE", color: "#1E40AF" }}>📂 Github-handsOn</span>
+                                <span style={{ fontSize: 10, fontWeight: 700, padding: "2px 7px", borderRadius: 100, background: "#F1F5F9", color: "#475569" }}>📘 HandBook</span>
+                                {mod.id === "M7891011" && (
+                                  <span style={{ fontSize: 10, fontWeight: 700, padding: "2px 7px", borderRadius: 100, background: "#EDE9FE", color: "#5B21B6" }}>🎓 SkillSpring Course</span>
+                                )}
+                              </>
+                            ) : (
+                              <span style={{ fontSize: 10, padding: "2px 7px", borderRadius: 100, background: "#F1F5F9", color: "#475569" }}>{mod.pdfLabel}</span>
+                            )}
                           </div>
                         </div>
                         <div style={{ textAlign: "right", flexShrink: 0 }}>

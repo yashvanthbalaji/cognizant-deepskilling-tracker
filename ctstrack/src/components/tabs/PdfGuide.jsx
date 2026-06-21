@@ -21,11 +21,18 @@ export default function PdfGuide() {
           ["9","Cloud Deployment","github","—"],
           ["10","Gen AI Fundamentals","skillspring","SkillSpring: GenAI / Prompt Engineering / Copilot courses"],
         ].map(([num, name, type, src], i) => {
-          const tag = type === "pdf"
-            ? { bg: "#DBEAFE", tx: "#1E40AF", label: "📂 Github-handsOn" }
+          const tags = type === "pdf"
+            ? [
+                { bg: "#DBEAFE", tx: "#1E40AF", label: "📂 Github-handsOn" },
+                { bg: "#F1F5F9", tx: "#475569", label: "📘 HandBook" }
+              ]
             : type === "skillspring"
-            ? { bg: "#EDE9FE", tx: "#5B21B6", label: "🎓 SkillSpring Course" }
-            : { bg: "#F1F5F9", tx: "#475569", label: "📘 HandBook" };
+            ? [
+                { bg: "#EDE9FE", tx: "#5B21B6", label: "🎓 SkillSpring Course" }
+              ]
+            : [
+                { bg: "#F1F5F9", tx: "#475569", label: "📘 HandBook" }
+              ];
           return (
             <div key={num} style={{ display: "grid", gridTemplateColumns: "28px 1fr auto", gap: 10, alignItems: "center", padding: "9px 14px", borderBottom: i < 9 ? "1px solid #F3F4F6" : "none" }}>
               <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#EEF2FF", color: "#4F46E5", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 700 }}>{num}</div>
@@ -33,7 +40,11 @@ export default function PdfGuide() {
                 <div style={{ fontSize: 12.5, fontWeight: 600, color: "#1E293B" }}>Module {num} — {name}</div>
                 {src !== "—" && <div style={{ fontSize: 10.5, color: "#94A3B8", marginTop: 1 }}>{src}</div>}
               </div>
-              <span style={{ fontSize: 10, fontWeight: 700, padding: "3px 9px", borderRadius: 100, background: tag.bg, color: tag.tx, whiteSpace: "nowrap" }}>{tag.label}</span>
+              <div style={{ display: "flex", gap: 6, flexWrap: "wrap", justifyContent: "flex-end", alignItems: "center" }}>
+                {tags.map((tag, idx) => (
+                  <span key={idx} style={{ fontSize: 10, fontWeight: 700, padding: "3px 9px", borderRadius: 100, background: tag.bg, color: tag.tx, whiteSpace: "nowrap" }}>{tag.label}</span>
+                ))}
+              </div>
             </div>
           );
         })}
@@ -90,7 +101,7 @@ export default function PdfGuide() {
         <div key={item.pdf} style={{ background: "#fff", borderRadius: 12, border: `1.5px solid ${item.accent}30`, marginBottom: 20, overflow: "hidden" }}>
           <div style={{ background: `${item.accent}0D`, borderBottom: `1px solid ${item.accent}20`, padding: "12px 16px" }}>
             <div style={{ fontSize: 10, fontWeight: 700, color: item.accent, textTransform: "uppercase", letterSpacing: 1 }}>{item.module}</div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: "#111", marginTop: 2 }}>📘 {item.pdf}</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: "#111", marginTop: 2 }}>📂 {item.pdf}</div>
             <div style={{ fontSize: 12, color: "#6B7280", marginTop: 2 }}>Use during: <strong>{item.dates}</strong> · {item.items.length} exercises</div>
           </div>
           {item.items.map((ex, i) => {

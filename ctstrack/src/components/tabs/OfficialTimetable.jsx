@@ -145,9 +145,27 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
                           </div>
                           
                           <div style={{ display: "flex", gap: 5, flexWrap: "wrap", marginTop: 4 }}>
-                            <span style={{ fontSize: 10, padding: "2px 7px", borderRadius: 100, background: "#F1F5F9", color: "#64748B" }}>{m.pdf}</span>
+                            {m.id === "M3" || m.id === "M5" || m.id === "M6" || m.id === "M7" ? (
+                              <>
+                                <span style={{ fontSize: 10, fontWeight: 700, padding: "2px 7px", borderRadius: 100, background: "#DBEAFE", color: "#1E40AF" }}>📂 Github-handsOn</span>
+                                <span style={{ fontSize: 10, fontWeight: 700, padding: "2px 7px", borderRadius: 100, background: "#F1F5F9", color: "#475569" }}>📘 HandBook</span>
+                                {m.id === "M7" && (
+                                  <span style={{ fontSize: 10, fontWeight: 700, padding: "2px 7px", borderRadius: 100, background: "#EDE9FE", color: "#5B21B6" }}>🎓 SkillSpring Course</span>
+                                )}
+                              </>
+                            ) : m.id === "M10" ? (
+                              <span style={{ fontSize: 10, fontWeight: 700, padding: "2px 7px", borderRadius: 100, background: "#EDE9FE", color: "#5B21B6" }}>🎓 SkillSpring Course</span>
+                            ) : (
+                              <span style={{ fontSize: 10, padding: "2px 7px", borderRadius: 100, background: "#F1F5F9", color: "#64748B" }}>{m.pdf}</span>
+                            )}
                             <span style={{ fontSize: 10, padding: "2px 7px", borderRadius: 100, background: "#F8FAFC", color: "#94A3B8" }}>Official: {m.official}</span>
                           </div>
+
+                          {(m.id === "M3" || m.id === "M5" || m.id === "M6" || m.id === "M7") && (
+                            <div style={{ fontSize: 10.5, color: "#64748B", marginTop: 4 }}>
+                              📄 PDF: <strong>{m.pdf.replace("📂 ", "").replace("📗 ", "").replace("📙 ", "").replace("📕 ", "")}</strong>
+                            </div>
+                          )}
 
                           <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginTop: 5 }}>
                             {m.topics.map((t, i) => (

@@ -12,7 +12,7 @@ export const CONSTRUCTS = [
     modules: [
       {
         id: "M1", name: "Module 1 — Design Patterns & Principles",
-        pdf: "📂 GitHub Repo (no dedicated PDF)",
+        pdf: "📘 HandBook",
         official: "shares 2-day block",
         topics: ["SOLID Principles", "Creational, Structural, Behavioral Patterns"],
         subTopics: [
@@ -35,7 +35,7 @@ export const CONSTRUCTS = [
       },
       {
         id: "M2", name: "Module 2 — Data Structures & Algorithms",
-        pdf: "📂 GitHub Repo (no dedicated PDF)",
+        pdf: "📘 HandBook",
         official: "shares 2-day block",
         topics: ["Time/Space Complexity", "Sorting & Searching Algorithms"],
         subTopics: [
@@ -78,7 +78,7 @@ export const CONSTRUCTS = [
     modules: [
       {
         id: "M3", name: "Module 3 — Database Integration (PostgreSQL, MySQL & MongoDB)",
-        pdf: "📘 DatabaseIntegration_HandsOn.pdf (7 Hands-On)",
+        pdf: "📂 DatabaseIntegration_HandsOn.pdf (7 Hands-On)",
         official: "2 days (handbook) — PDF itself says 4 days, plan for more time",
         topics: ["PostgreSQL/MySQL DDL & DML", "Subqueries, Views, Transactions, Indexes", "MongoDB, SQLAlchemy ORM, Alembic"],
         subTopics: [
@@ -154,7 +154,7 @@ export const CONSTRUCTS = [
       },
       {
         id: "M4", name: "Module 4 — Unit Testing (PyTest, unittest, Jest & Mocha)",
-        pdf: "📂 GitHub Repo (no dedicated PDF)",
+        pdf: "📘 HandBook",
         official: "4 days",
         topics: ["PyTest fixtures, parametrize, coverage", "unittest.mock, TDD Red-Green-Refactor"],
         subTopics: [
@@ -244,7 +244,7 @@ export const CONSTRUCTS = [
     modules: [
       {
         id: "M5", name: "Module 5 — Python Backend Frameworks",
-        pdf: "📗 PythonBackendFrameworks_HandsOn.pdf (10 Hands-On)",
+        pdf: "📂 PythonBackendFrameworks_HandsOn.pdf (10 Hands-On)",
         official: "4 days",
         topics: ["Django (setup, ORM, DRF)", "Flask (Blueprints, SQLAlchemy)", "FastAPI (Pydantic, async, JWT)", "REST best practices, Microservices"],
         subTopics: [
@@ -323,7 +323,7 @@ export const CONSTRUCTS = [
       },
       {
         id: "M6", name: "Module 6 — Frontend Development Basics (React, Angular & Vue.js overview)",
-        pdf: "📙 FrontendDevelopment_HandsOn.pdf (10 Hands-On) — PDF calls this \"Module 2\"; GitHub folder must be Module2_FrontendDev/<YourName>/",
+        pdf: "📂 FrontendDevelopment_HandsOn.pdf (10 Hands-On) — PDF calls this \"Module 2\"; GitHub folder must be Module2_FrontendDev/<YourName>/",
         official: "9 days",
         topics: ["HTML5/CSS3/JS ES6+", "React, Angular, Vue.js", "Accessibility, State management"],
         subTopics: [
@@ -408,7 +408,7 @@ export const CONSTRUCTS = [
       },
       {
         id: "M7", name: "Module 7 — QA Concepts & Test Automation (Selenium Basics)",
-        pdf: "📕 SeleniumBasics_HandsOn.pdf (7 Hands-On) + SkillSpring \"Selenium Interactive Course\" (supplementary)",
+        pdf: "📂 SeleniumBasics_HandsOn.pdf (7 Hands-On) + SkillSpring \"Selenium Interactive Course\" (supplementary)",
         official: "6 days",
         topics: ["SDLC vs TDLC, V-Model", "Selenium WebDriver, locators", "Page Object Model (POM)"],
         subTopics: [
@@ -474,7 +474,7 @@ export const CONSTRUCTS = [
     modules: [
       {
         id: "M8", name: "Module 8 — Agile, Code Review & Cross-Functional Collaboration",
-        pdf: "📂 GitHub Repo",
+        pdf: "📘 HandBook",
         official: "no individual split given by Cognizant",
         topics: ["Scrum ceremonies, Sprint planning", "Branching, PR workflow, Kanban"],
         subTopics: [
@@ -548,7 +548,7 @@ export const CONSTRUCTS = [
       },
       {
         id: "M9", name: "Module 9 — Cloud Deployment",
-        pdf: "📂 GitHub Repo",
+        pdf: "📘 HandBook",
         official: "no individual split given by Cognizant",
         topics: ["Docker, Dockerfile, containers", "CI/CD (GitHub Actions), AWS/Azure/GCP basics"],
         subTopics: [
