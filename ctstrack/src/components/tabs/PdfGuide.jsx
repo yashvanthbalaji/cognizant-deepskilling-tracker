@@ -22,10 +22,10 @@ export default function PdfGuide() {
           ["10","Gen AI Fundamentals","skillspring","SkillSpring: GenAI / Prompt Engineering / Copilot courses"],
         ].map(([num, name, type, src], i) => {
           const tag = type === "pdf"
-            ? { bg: "#DBEAFE", tx: "#1E40AF", label: "📘 Github-handsOn" }
+            ? { bg: "#DBEAFE", tx: "#1E40AF", label: "📂 Github-handsOn" }
             : type === "skillspring"
             ? { bg: "#EDE9FE", tx: "#5B21B6", label: "🎓 SkillSpring Course" }
-            : { bg: "#F1F5F9", tx: "#475569", label: "📂 HandBook" };
+            : { bg: "#F1F5F9", tx: "#475569", label: "📘 HandBook" };
           return (
             <div key={num} style={{ display: "grid", gridTemplateColumns: "28px 1fr auto", gap: 10, alignItems: "center", padding: "9px 14px", borderBottom: i < 9 ? "1px solid #F3F4F6" : "none" }}>
               <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#EEF2FF", color: "#4F46E5", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 700 }}>{num}</div>
