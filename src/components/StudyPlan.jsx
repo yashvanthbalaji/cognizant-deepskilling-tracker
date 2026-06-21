@@ -9,9 +9,9 @@ import HandBookTab from "./tabs/HandBookTab";
 import MasterclassTab from "./tabs/MasterclassTab";
 
 export default function StudyPlan() {
-  const [tab, setTab] = useState(() => { try { return localStorage.getItem("dn5_tab") || "calendar"; } catch(e) { return "calendar"; } });
-  const [modsDone, setModsDone] = useState(() => { try { return JSON.parse(localStorage.getItem("dn5_modsDone")) || {}; } catch(e) { return {}; } });
-  const [linksDone, setLinksDone] = useState(() => { try { return JSON.parse(localStorage.getItem("dn5_linksDone")) || {}; } catch(e) { return {}; } });
+  const [tab, setTab] = useState(() => { try { return localStorage.getItem("dn5_tab") || "calendar"; } catch { return "calendar"; } });
+  const [modsDone, setModsDone] = useState(() => { try { return JSON.parse(localStorage.getItem("dn5_modsDone")) || {}; } catch { return {}; } });
+  const [linksDone, setLinksDone] = useState(() => { try { return JSON.parse(localStorage.getItem("dn5_linksDone")) || {}; } catch { return {}; } });
   const [loadingDb, setLoadingDb] = useState(true);
   const [syncStatus, setSyncStatus] = useState("synced"); // "synced", "syncing", "error"
   
@@ -67,6 +67,7 @@ export default function StudyPlan() {
     };
     fetchDbProgress();
     return () => { active = false; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 2. Save progress to Firestore when local states change
@@ -109,7 +110,9 @@ export default function StudyPlan() {
         }
       });
     });
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (changed) setModsDone(newModsDone);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [linksDone]);
 
   // Pleasant focus timer double-chime arpeggio
@@ -401,31 +404,39 @@ export default function StudyPlan() {
       }}>
         <div style={{ maxWidth: 860, margin: "0 auto" }}>
 
-          {/* App title */}
-          <div style={{ marginBottom: 16 }}>
-            <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: 1.4, color: "rgba(255,255,255,0.45)", textTransform: "uppercase", marginBottom: 6 }}>
-              Cognizant Digital Nurture 5.0
-            </div>
-            <h1 style={{ fontSize: 22, fontWeight: 800, color: "#F8FAFC", margin: 0, lineHeight: 1.2, letterSpacing: "-0.3px" }}>
-              Python Full Stack Engineer
-            </h1>
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", marginTop: 3, fontWeight: 400 }}>
-              10 Modules · 4 FSE Constructs · {OFFICIAL_TOTAL} official days
-            </div>
-          </div>
-
-          {/* ── CONTROL STRIP — date + focus mode, visually grouped ── */}
+          {/* ── TITLE ROW: heading left, date+focus right — single flex row ── */}
           <div style={{
             display: "flex",
+            justifyContent: "space-between",
             alignItems: "center",
-            gap: 6,
-            marginBottom: 20,
-            padding: "6px 10px",
-            background: "rgba(255,255,255,0.06)",
-            borderRadius: 9,
-            border: "1px solid rgba(255,255,255,0.08)",
-            width: "fit-content",
+            gap: 16,
+            marginBottom: 18,
+            flexWrap: "wrap",
           }}>
+            {/* Left: app title */}
+            <div>
+              <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: 1.4, color: "rgba(255,255,255,0.70)", textTransform: "uppercase", marginBottom: 5 }}>
+                Cognizant Digital Nurture 5.0
+              </div>
+              <h1 style={{ fontSize: 22, fontWeight: 800, color: "#F8FAFC", margin: 0, lineHeight: 1.2, letterSpacing: "-0.3px" }}>
+                Python Full Stack Engineer
+              </h1>
+              <div style={{ fontSize: 12, color: "rgba(255,255,255,0.78)", marginTop: 3, fontWeight: 400 }}>
+                10 Modules · 4 FSE Constructs · {OFFICIAL_TOTAL} official days
+              </div>
+            </div>
+
+            {/* Right: control strip */}
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              padding: "6px 10px",
+              background: "rgba(255,255,255,0.06)",
+              borderRadius: 9,
+              border: "1px solid rgba(255,255,255,0.08)",
+              flexShrink: 0,
+            }}>
 
             {/* Calendar */}
             <div ref={calendarRef} style={{ position: "relative" }}>
@@ -577,12 +588,13 @@ export default function StudyPlan() {
                 </div>
               )}
             </div>
-          </div>
+            </div>
+          </div>{/* ── end TITLE ROW ── */}
 
           {/* ── PROGRESS BAR SECTION ── */}
           <div style={{ marginBottom: 18 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 7 }}>
-              <span style={{ fontSize: 11.5, color: "rgba(255,255,255,0.55)", fontWeight: 500 }}>
+              <span style={{ fontSize: 11.5, color: "rgba(255,255,255,0.80)", fontWeight: 500 }}>
                 {calDone} of {allModuleIds.length} modules complete
               </span>
               <span style={{ fontSize: 13, fontWeight: 700, color: calPct === 100 ? "#34D399" : "rgba(255,255,255,0.9)" }}>
@@ -622,7 +634,7 @@ export default function StudyPlan() {
                     cursor: "pointer",
                     fontSize: 12.5,
                     fontWeight: active ? 700 : 500,
-                    color: active ? "#C7D2FE" : "rgba(255,255,255,0.4)",
+                    color: active ? "#C7D2FE" : "rgba(255,255,255,0.65)",
                     letterSpacing: "0.1px",
                     outline: "none",
                     marginBottom: "-1px",
@@ -638,15 +650,12 @@ export default function StudyPlan() {
       </div>
 
       {/* ── CONTENT AREA ── */}
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: "24px 16px 48px" }}>
+      <div style={{ maxWidth: 860, margin: "0 auto", padding: "24px 20px 48px" }}>
 
         {tab === "calendar" && (
           <OfficialTimetable
             modsDone={modsDone}
             toggleModDone={toggleModDone}
-            allModuleIds={allModuleIds}
-            calDone={calDone}
-            calPct={calPct}
             linksDone={linksDone}
             toggleLink={toggleLink}
           />

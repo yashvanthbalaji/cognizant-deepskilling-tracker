@@ -239,7 +239,7 @@ export default function MasterclassTab() {
       )}
 
       {/* ── HORIZONTAL WEEKS TABS ── */}
-      <h3 style={{ fontSize: 14, fontWeight: 700, color: "#475569", marginBottom: 10, textTransform: "uppercase", letterSpacing: 0.5 }}>
+      <h3 style={{ fontSize: 14, fontWeight: 700, color: "#334155", marginBottom: 10, textTransform: "uppercase", letterSpacing: 0.5 }}>
         📅 Select Weekly Session
       </h3>
       <div style={{
@@ -255,9 +255,9 @@ export default function MasterclassTab() {
           const isActive = activeTab === m.id;
           const timeLeft = getRemainingTime(m.startTime);
 
-          let badgeColor = "#94A3B8";
-          let badgeBg = "#F1F5F9";
-          let badgeText = "Upcoming";
+          let badgeColor;
+          let badgeBg;
+          let badgeText;
 
           if (status === "COMPLETED") {
             badgeColor = "#16A34A";
@@ -297,10 +297,10 @@ export default function MasterclassTab() {
                 minWidth: 110
               }}
             >
-              <span style={{ fontSize: 13, fontWeight: 800, color: isActive ? "#0F172A" : "#475569" }}>
+              <span style={{ fontSize: 13, fontWeight: 800, color: isActive ? "#0F172A" : "#334155" }}>
                 {m.week}
               </span>
-              <span style={{ fontSize: 11, color: "#94A3B8" }}>
+              <span style={{ fontSize: 11, color: "#475569" }}>
                 {m.dateStr.split("-").slice(0, 2).join(" ")}
               </span>
               <span style={{
@@ -355,20 +355,20 @@ export default function MasterclassTab() {
           marginBottom: 20
         }}>
           <div style={{ background: "#F8FAFC", padding: 12, borderRadius: 10 }}>
-            <span style={{ fontSize: 10, fontWeight: 700, color: "#94A3B8", textTransform: "uppercase" }}>Date & Time</span>
+            <span style={{ fontSize: 10, fontWeight: 700, color: "#475569", textTransform: "uppercase" }}>Date & Time</span>
             <div style={{ fontSize: 13, fontWeight: 700, color: "#334155", marginTop: 4 }}>
               📅 {selectedMeeting.dateStr}
             </div>
-            <div style={{ fontSize: 12, color: "#64748B", marginTop: 2 }}>
+            <div style={{ fontSize: 12, color: "#334155", marginTop: 2 }}>
               ⏰ {selectedMeeting.timings}
             </div>
           </div>
           <div style={{ background: "#F8FAFC", padding: 12, borderRadius: 10 }}>
-            <span style={{ fontSize: 10, fontWeight: 700, color: "#94A3B8", textTransform: "uppercase" }}>Target Group</span>
+            <span style={{ fontSize: 10, fontWeight: 700, color: "#475569", textTransform: "uppercase" }}>Target Group</span>
             <div style={{ fontSize: 13, fontWeight: 700, color: "#334155", marginTop: 4 }}>
               👥 {selectedMeeting.group}
             </div>
-            <div style={{ fontSize: 12, color: "#64748B", marginTop: 2 }}>
+            <div style={{ fontSize: 12, color: "#334155", marginTop: 2 }}>
               Cognizant Digital Nurture 5.0
             </div>
           </div>
@@ -376,7 +376,7 @@ export default function MasterclassTab() {
 
         {/* Topics covered */}
         <div style={{ marginBottom: 24 }}>
-          <h4 style={{ fontSize: 12, fontWeight: 700, color: "#64748B", marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.5 }}>
+          <h4 style={{ fontSize: 12, fontWeight: 700, color: "#334155", marginBottom: 8, textTransform: "uppercase", letterSpacing: 0.5 }}>
             📚 Covered Topics
           </h4>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
@@ -439,7 +439,7 @@ export default function MasterclassTab() {
               {isFirstUpcoming ? (
                 // ── BIG TIMER FOR FIRST UPCOMING MEETING ──
                 <div>
-                  <h4 style={{ fontSize: 12, fontWeight: 700, color: "#64748B", marginBottom: 10, textTransform: "uppercase", letterSpacing: 0.5 }}>
+                  <h4 style={{ fontSize: 12, fontWeight: 700, color: "#334155", marginBottom: 10, textTransform: "uppercase", letterSpacing: 0.5 }}>
                     ⌛ Time Left (Next Meeting Countdown)
                   </h4>
                   <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
@@ -460,20 +460,20 @@ export default function MasterclassTab() {
                         <div style={{ fontSize: 24, fontWeight: 800, color: "#6366A8", fontFamily: "monospace" }}>
                           {String(t.value).padStart(2, "0")}
                         </div>
-                        <div style={{ fontSize: 9, fontWeight: 700, color: "#64748B", textTransform: "uppercase", marginTop: 2 }}>
+                        <div style={{ fontSize: 9, fontWeight: 700, color: "#475569", textTransform: "uppercase", marginTop: 2 }}>
                           {t.label}
                         </div>
                       </div>
                     ))}
                   </div>
-                  <p style={{ fontSize: 12, color: "#94A3B8", marginTop: 8, fontStyle: "italic" }}>
+                  <p style={{ fontSize: 12, color: "#64748B", marginTop: 8, fontStyle: "italic" }}>
                     * This is your next upcoming Masterclass Session.
                   </p>
                 </div>
               ) : (
                 // ── SMALL TIMER FOR SUBSEQUENT MEETINGS ──
                 <div>
-                  <h4 style={{ fontSize: 12, fontWeight: 700, color: "#64748B", marginBottom: 6, textTransform: "uppercase", letterSpacing: 0.5 }}>
+                  <h4 style={{ fontSize: 12, fontWeight: 700, color: "#334155", marginBottom: 6, textTransform: "uppercase", letterSpacing: 0.5 }}>
                     ⌛ Time Remaining
                   </h4>
                   <div style={{

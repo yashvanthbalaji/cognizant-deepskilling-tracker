@@ -37,7 +37,7 @@ function getModuleProgressStats(m, linksDone) {
   return { done, total, pct, quizzesDone, quizzesTotal };
 }
 
-export default function OfficialTimetable({ modsDone, toggleModDone, allModuleIds, calDone, calPct, linksDone, toggleLink }) {
+export default function OfficialTimetable({ modsDone, toggleModDone, linksDone, toggleLink }) {
   const [openSub, setOpenSub] = useState({});
   const toggleOpenSub = id => setOpenSub(p => ({ ...p, [id]: !p[id] }));
 
@@ -94,9 +94,9 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
 
       <div style={{ marginBottom: 18 }}>
         <div style={{ background: "#fff", border: "1px solid #E2E8F0", borderRadius: 10, padding: "10px 14px", textAlign: "center" }}>
-          <div style={{ fontSize: 10, color: "#94A3B8", fontWeight: 700, textTransform: "uppercase" }}>Cognizant Official Duration</div>
+          <div style={{ fontSize: 10, color: "#475569", fontWeight: 700, textTransform: "uppercase" }}>Cognizant Official Duration</div>
           <div style={{ fontSize: 20, fontWeight: 800, color: "#1E293B" }}>{OFFICIAL_TOTAL} days</div>
-          <div style={{ fontSize: 10, color: "#94A3B8" }}>≈ 7 weeks @ 10-12 hrs/wk</div>
+          <div style={{ fontSize: 10, color: "#64748B" }}>≈ 7 weeks @ 10-12 hrs/wk</div>
         </div>
       </div>
 
@@ -122,7 +122,7 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
                 <div>
                   <div style={{ fontSize: 10, fontWeight: 700, color: c.color, textTransform: "uppercase", letterSpacing: 1 }}>FSE Construct {ci + 1} of 4</div>
                   <div style={{ fontSize: 15, fontWeight: 800, color: "#0F172A", marginTop: 1 }}>{c.name}</div>
-                  <div style={{ fontSize: 11.5, color: "#6B7280", marginTop: 3, fontStyle: "italic" }}>Handbook: "{c.handbookQuote}"</div>
+                  <div style={{ fontSize: 11.5, color: "#4B5563", marginTop: 3, fontStyle: "italic" }}>Handbook: "{c.handbookQuote}"</div>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
                   <div style={{ fontSize: 12, fontWeight: 700, color: c.color }}>{cModsDone}/{c.modules.length}</div>
@@ -131,7 +131,7 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
               </div>
               {isConstructOpen && (
                 <div style={{ display: "flex", gap: 6, marginTop: 8, flexWrap: "wrap" }}>
-                  <span style={{ fontSize: 11, fontWeight: 700, padding: "3px 9px", borderRadius: 100, background: "#F1F5F9", color: "#475569" }}>Official: {c.officialDays} days</span>
+                  <span style={{ fontSize: 11, fontWeight: 700, padding: "3px 9px", borderRadius: 100, background: "#EEF0F5", color: "#334155" }}>Official: {c.officialDays} days</span>
                 </div>
               )}
             </div>
@@ -179,27 +179,27 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
                             ) : m.id === "M10" ? (
                               <span style={{ fontSize: 10, fontWeight: 700, padding: "2px 7px", borderRadius: 100, background: "#EDE9FE", color: "#5B21B6" }}>🎓 SkillSpring Course</span>
                             ) : (
-                              <span style={{ fontSize: 10, padding: "2px 7px", borderRadius: 100, background: "#F1F5F9", color: "#64748B" }}>{m.pdf}</span>
+                              <span style={{ fontSize: 10, padding: "2px 7px", borderRadius: 100, background: "#F1F5F9", color: "#334155" }}>{m.pdf}</span>
                             )}
-                            <span style={{ fontSize: 10, padding: "2px 7px", borderRadius: 100, background: "#F8FAFC", color: "#94A3B8" }}>Official: {m.official}</span>
+                            <span style={{ fontSize: 10, padding: "2px 7px", borderRadius: 100, background: "#EEF0F5", color: "#475569" }}>Official: {m.official}</span>
                           </div>
 
                           {(m.id === "M3" || m.id === "M5" || m.id === "M6" || m.id === "M7") && (
-                            <div style={{ fontSize: 10.5, color: "#64748B", marginTop: 4 }}>
+                            <div style={{ fontSize: 10.5, color: "#334155", marginTop: 4 }}>
                               📄 PDF: <strong>{m.pdf.replace("📂 ", "").replace("📗 ", "").replace("📙 ", "").replace("📕 ", "")}</strong>
                             </div>
                           )}
 
                           <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginTop: 5 }}>
                             {m.topics.map((t, i) => (
-                              <span key={i} style={{ fontSize: 10.5, background: "#F8FAFC", color: "#64748B", padding: "2px 7px", borderRadius: 5 }}>{t}</span>
+                              <span key={i} style={{ fontSize: 10.5, background: "#F1F5F9", color: "#334155", padding: "2px 7px", borderRadius: 5 }}>{t}</span>
                             ))}
                           </div>
 
                           {/* Module progress bar */}
                           <div style={{ marginTop: 8, maxWidth: "100%" }}>
                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 3 }}>
-                              <span style={{ fontSize: 10, color: "#64748B", fontWeight: 600 }}>Module Progress</span>
+                              <span style={{ fontSize: 10, color: "#334155", fontWeight: 600 }}>Module Progress</span>
                               <span style={{ fontSize: 10, color: stats.pct === 100 ? "#16A34A" : c.color, fontWeight: 700 }}>
                                 {stats.pct}% ({stats.done}/{stats.total})
                               </span>

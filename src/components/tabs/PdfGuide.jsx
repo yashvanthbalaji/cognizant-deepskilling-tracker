@@ -6,7 +6,7 @@ export default function PdfGuide() {
       </div>
 
       <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #E2E8F0", overflow: "hidden", marginBottom: 24 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "28px 1fr auto", gap: 10, padding: "9px 14px", background: "#F8FAFC", borderBottom: "1px solid #E2E8F0", fontSize: 10, fontWeight: 700, color: "#94A3B8", textTransform: "uppercase" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "28px 1fr auto", gap: 10, padding: "9px 14px", background: "#F3F4F6", borderBottom: "1px solid #E2E8F0", fontSize: 10, fontWeight: 700, color: "#475569", textTransform: "uppercase" }}>
           <span></span><span>Module</span><span>Source to Use</span>
         </div>
         {[
@@ -38,7 +38,7 @@ export default function PdfGuide() {
               <div style={{ width: 22, height: 22, borderRadius: "50%", background: "#EEF2FF", color: "#4F46E5", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 700 }}>{num}</div>
               <div>
                 <div style={{ fontSize: 12.5, fontWeight: 600, color: "#1E293B" }}>Module {num} — {name}</div>
-                {src !== "—" && <div style={{ fontSize: 10.5, color: "#94A3B8", marginTop: 1 }}>{src}</div>}
+                {src !== "—" && <div style={{ fontSize: 10.5, color: "#475569", marginTop: 1 }}>{src}</div>}
               </div>
               <div style={{ display: "flex", gap: 6, flexWrap: "wrap", justifyContent: "flex-end", alignItems: "center" }}>
                 {tags.map((tag, idx) => (
@@ -102,7 +102,7 @@ export default function PdfGuide() {
           <div style={{ background: `${item.accent}0D`, borderBottom: `1px solid ${item.accent}20`, padding: "12px 16px" }}>
             <div style={{ fontSize: 10, fontWeight: 700, color: item.accent, textTransform: "uppercase", letterSpacing: 1 }}>{item.module}</div>
             <div style={{ fontSize: 14, fontWeight: 700, color: "#111", marginTop: 2 }}>📂 {item.pdf}</div>
-            <div style={{ fontSize: 12, color: "#6B7280", marginTop: 2 }}>Use during: <strong>{item.dates}</strong> · {item.items.length} exercises</div>
+            <div style={{ fontSize: 12, color: "#374151", marginTop: 2 }}>Use during: <strong>{item.dates}</strong> · {item.items.length} exercises</div>
           </div>
           {item.items.map((ex, i) => {
             const lvlBg = ex[2] === "Beginner" ? "#E0F0E9" : ex[2] === "Intermediate" ? "#ECE8F5" : "#FDEAEA";
