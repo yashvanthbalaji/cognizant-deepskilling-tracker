@@ -16,17 +16,6 @@ A self-built study companion for tracking the official DN5.0 Deepskilling curric
 
 ---
 
-## 📸 Preview
-
-> _Add 3–4 screenshots or a short screen-recording GIF here once your real data is in — this is the single highest-impact section for anyone landing on this README._
-
-| Tracker Tab | HandBook Viewer | Masterclass Countdown |
-|---|---|---|
-| ![Tracker screenshot](<img width="1908" height="956" alt="image" src="https://github.com/user-attachments/assets/de6deab7-b671-47d5-84fc-61a2b5e96f8a" />
-) | ![HandBook screenshot](<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2e600108-7736-4d8d-9e68-cc1afc46460c" />
-) | ![Masterclass screenshot](<img width="1919" height="989" alt="image" src="https://github.com/user-attachments/assets/b3b7ac69-e033-4c65-b53a-bb1c528b8ff4" />
-) |
-
 **To add your own:**
 1. Create a `docs/screenshots/` folder in your project root.
 2. Drop in PNG/JPG screenshots of each tab (Tracker, PDF Guide, HandBook, Masterclass, Sign-In).
