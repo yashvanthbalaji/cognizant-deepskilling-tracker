@@ -327,10 +327,12 @@ export default function OfficialTimetable({ modsDone, toggleModDone, allModuleId
         );
       })}
 
-      <div style={{ background: "linear-gradient(135deg,#1E3A5F,#7C3AED)", color: "#fff", borderRadius: 14, padding: "18px 20px", textAlign: "center" }}>
-        <div style={{ fontSize: 22, marginBottom: 4 }}>🏁</div>
-        <div style={{ fontSize: 14, fontWeight: 800 }}>End of Construct 4 (Platforms)</div>
-        <div style={{ fontSize: 12, opacity: 0.8, marginTop: 4 }}>All 10 modules done, GitHub repo organised and shared with POC, every "Check Your Understanding" quiz attempted. Handbook gives no separate KBA-prep days — it follows immediately.</div>
+      <div style={{ background: "linear-gradient(135deg, #16A34A 0%, #059669 100%)", color: "#fff", borderRadius: 14, padding: "20px 24px", textAlign: "center" }}>
+        <div style={{ fontSize: 24, marginBottom: 6 }}>🎓</div>
+        <div style={{ fontSize: 15, fontWeight: 800, letterSpacing: 0.3 }}>Congratulations on successfully completing the 7-week DN 5.0 Deep Skilling learning program!</div>
+        <div style={{ fontSize: 12.5, fontWeight: 700, opacity: 0.95, marginTop: 8, background: "rgba(255, 255, 255, 0.2)", display: "inline-block", padding: "5px 14px", borderRadius: 6, letterSpacing: 0.5 }}>
+          READY TO ATTEMPT Knowledge-Based Assessment (KBA)
+        </div>
       </div>
     </div>
   );
