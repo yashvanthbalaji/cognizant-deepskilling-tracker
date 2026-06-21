@@ -286,10 +286,10 @@ export default function StudyPlan() {
         }
         .sp-tab-btn:hover {
           color: #fff !important;
-          background: rgba(129,140,248,0.13) !important;
-          border-bottom-color: rgba(129,140,248,0.5) !important;
-          transform: translateY(-1px);
-          box-shadow: 0 4px 14px rgba(99,102,241,0.18);
+          background: rgba(129,140,248,0.15) !important;
+          border-color: rgba(129,140,248,0.6) !important;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 18px rgba(99,102,241,0.22);
         }
         .sp-tab-btn:active {
           transform: translateY(0);
@@ -657,8 +657,8 @@ export default function StudyPlan() {
             </div>
           </div>
 
-          {/* ── TAB BAR — underline style ── */}
-          <div style={{ display: "flex", gap: 0, borderBottom: "1px solid rgba(255,255,255,0.1)", marginBottom: 0 }}>
+          {/* ── TAB BAR — grey box style ── */}
+          <div style={{ display: "flex", gap: 8, padding: "12px 0 14px", alignItems: "center" }}>
             {[
               ["calendar", "📅 Tracker"],
               ["pdfmap", "📘 PDF Guide"],
@@ -673,19 +673,25 @@ export default function StudyPlan() {
                   onClick={() => setTab(id)}
                   style={{
                     flex: 1,
-                    padding: "11px 18px",
+                    padding: "9px 14px",
                     textAlign: "center",
-                    border: "none",
-                    borderBottom: active ? "2px solid #818CF8" : "2px solid rgba(129,140,248,0.28)",
-                    background: "none",
+                    border: active
+                      ? "1.5px solid #818CF8"
+                      : "1.5px solid rgba(255,255,255,0.18)",
+                    borderRadius: 8,
+                    background: active
+                      ? "rgba(99,102,241,0.18)"
+                      : "rgba(255,255,255,0.05)",
                     cursor: "pointer",
                     fontSize: 12.5,
                     fontWeight: active ? 700 : 500,
-                    color: active ? "#C7D2FE" : "rgba(255,255,255,0.65)",
+                    color: active ? "#C7D2FE" : "rgba(255,255,255,0.70)",
                     letterSpacing: "0.1px",
                     outline: "none",
-                    marginBottom: "-1px",
                     whiteSpace: "nowrap",
+                    boxShadow: active
+                      ? "0 4px 14px rgba(99,102,241,0.25), inset 0 1px 0 rgba(255,255,255,0.08)"
+                      : "inset 0 1px 0 rgba(255,255,255,0.04)",
                   }}
                 >
                   {label}
