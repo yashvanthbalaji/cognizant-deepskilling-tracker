@@ -13,6 +13,7 @@ export default function StudyPlan() {
   const [modsDone, setModsDone] = useState(() => { try { return JSON.parse(localStorage.getItem("dn5_modsDone")) || {}; } catch { return {}; } });
   const [linksDone, setLinksDone] = useState(() => { try { return JSON.parse(localStorage.getItem("dn5_linksDone")) || {}; } catch { return {}; } });
   const [loadingDb, setLoadingDb] = useState(true);
+  const [fetchSuccess, setFetchSuccess] = useState(false);
   const [syncStatus, setSyncStatus] = useState("synced"); // "synced", "syncing", "error"
 
   const [showCalendar, setShowCalendar] = useState(false);
@@ -30,7 +31,40 @@ export default function StudyPlan() {
   const toggleLink = id => setLinksDone(p => ({ ...p, [id]: !p[id] }));
 
   const allModuleIds = useMemo(() => CONSTRUCTS.flatMap(c => c.modules.map(m => m.id)), []);
-  const toggleModDone = id => setModsDone(p => ({ ...p, [id]: !p[id] }));
+  const toggleModDone = id => {
+    let targetMod = null;
+    for (const c of CONSTRUCTS) {
+      const found = c.modules.find(m => m.id === id);
+      if (found) {
+        targetMod = found;
+        break;
+      }
+    }
+    if (!targetMod) return;
+
+    const linkIds = [];
+    if (targetMod.subTopics) {
+      targetMod.subTopics.forEach(st => {
+        if (st.links) {
+          st.links.forEach(l => linkIds.push(l.id));
+        }
+      });
+    }
+    if (targetMod.quizzes) {
+      targetMod.quizzes.forEach(q => linkIds.push(q.id));
+    }
+
+    const nextState = !modsDone[id];
+    setLinksDone(prev => {
+      const nextLinks = { ...prev };
+      linkIds.forEach(linkId => {
+        nextLinks[linkId] = nextState;
+      });
+      return nextLinks;
+    });
+    setModsDone(prev => ({ ...prev, [id]: nextState }));
+  };
+
   const calDone = allModuleIds.filter(id => modsDone[id]).length;
   const calPct = Math.round((calDone / allModuleIds.length) * 100);
 
@@ -59,6 +93,7 @@ export default function StudyPlan() {
             updatedAt: new Date().toISOString()
           });
         }
+        if (active) setFetchSuccess(true);
       } catch (err) {
         console.error("Firestore progress fetch failed:", err);
       } finally {
@@ -72,7 +107,7 @@ export default function StudyPlan() {
 
   // 2. Save progress to Firestore when local states change
   useEffect(() => {
-    if (loadingDb) return; // Skip saving until the initial database load is complete
+    if (loadingDb || !fetchSuccess) return; // Skip saving until the initial database load is complete & successful
     const saveDbProgress = async () => {
       const user = auth.currentUser;
       if (!user) return;
@@ -91,7 +126,7 @@ export default function StudyPlan() {
       }
     };
     saveDbProgress();
-  }, [modsDone, linksDone, loadingDb]);
+  }, [modsDone, linksDone, loadingDb, fetchSuccess]);
 
   // ── Cascading auto-complete: every link in every sub-topic of a module checked → module auto-marked done.
   useEffect(() => {
