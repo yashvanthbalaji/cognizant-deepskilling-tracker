@@ -111,6 +111,7 @@ export default function OfficialTimetable({ modsDone, toggleModDone, linksDone, 
           box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12) !important;
           transform: translateY(-1.5px) !important;
         }
+
       `}</style>
 
       <div style={{ background: "#F5F0E6", border: "1px solid #D9CBA8", borderRadius: 10, padding: "12px 16px", marginBottom: 14, fontSize: 13, color: "#6B5B3A", lineHeight: 1.5 }}>
@@ -118,7 +119,8 @@ export default function OfficialTimetable({ modsDone, toggleModDone, linksDone, 
       </div>
 
 
-      {CONSTRUCTS.map((c, ci) => {
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        {CONSTRUCTS.map((c, ci) => {
         const cModsDone = c.modules.filter(m => modsDone[m.id]).length;
         const isConstructOpen = !!openConstructs[c.id];
 
@@ -380,6 +382,7 @@ export default function OfficialTimetable({ modsDone, toggleModDone, linksDone, 
           </div>
         );
       })}
+      </div>
 
       <div style={{ background: "linear-gradient(135deg, #16A34A 0%, #059669 100%)", color: "#fff", borderRadius: 14, padding: "20px 24px", textAlign: "center" }}>
         <div style={{ fontSize: 24, marginBottom: 6 }}>🎓</div>

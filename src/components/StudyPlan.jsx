@@ -279,10 +279,38 @@ export default function StudyPlan() {
       <style>{`
         .sp-tab-btn { transition: color 0.15s, border-color 0.15s; }
         .sp-tab-btn:hover { color: #fff !important; }
-        .sp-toolbar-btn { transition: background 0.15s, opacity 0.15s; }
-        .sp-toolbar-btn:hover { opacity: 0.85; }
+        .sp-toolbar-btn { transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1); }
+        .sp-toolbar-btn:hover {
+          background: rgba(255, 255, 255, 0.08) !important;
+          color: #fff !important;
+          transform: translateY(-1.5px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+        .sp-toolbar-btn:active {
+          transform: translateY(0);
+        }
         .sp-avatar-btn { transition: box-shadow 0.15s; }
         .sp-avatar-btn:hover { box-shadow: 0 0 0 3px rgba(255,255,255,0.35); }
+        .sp-container {
+          width: 100%;
+          margin: 0 auto;
+          padding-left: 20px;
+          padding-right: 20px;
+          box-sizing: border-box;
+          max-width: 1400px;
+        }
+        @media (max-width: 1024px) {
+          .sp-container {
+            max-width: 1100px;
+          }
+        }
+        @media (max-width: 768px) {
+          .sp-container {
+            max-width: 100%;
+            padding-left: 16px;
+            padding-right: 16px;
+          }
+        }
       `}</style>
 
       {/* ══════════════════════════════════════════════════════
@@ -400,9 +428,9 @@ export default function StudyPlan() {
          ══════════════════════════════════════════════════════ */}
       <div style={{
         background: "linear-gradient(160deg,#1E2A3A 0%,#16202C 100%)",
-        padding: "20px 20px 0",
+        padding: "20px 0 0",
       }}>
-        <div style={{ maxWidth: 860, margin: "0 auto" }}>
+        <div className="sp-container">
 
           {/* ── TITLE ROW: heading left, date+focus right — single flex row ── */}
           <div style={{
@@ -430,11 +458,11 @@ export default function StudyPlan() {
             <div style={{
               display: "flex",
               alignItems: "center",
-              gap: 6,
-              padding: "6px 10px",
-              background: "rgba(255,255,255,0.06)",
-              borderRadius: 9,
-              border: "1px solid rgba(255,255,255,0.08)",
+              gap: 5,
+              padding: "4px 5px",
+              background: "rgba(0, 0, 0, 0.22)",
+              borderRadius: 10,
+              border: "1px solid rgba(255, 255, 255, 0.05)",
               flexShrink: 0,
             }}>
 
@@ -450,13 +478,13 @@ export default function StudyPlan() {
                     setShowFocusTimer(false);
                   }}
                   style={{
-                    background: "transparent",
-                    border: "none",
-                    color: "rgba(255,255,255,0.75)",
+                    background: showCalendar ? "rgba(255, 255, 255, 0.10)" : "transparent",
+                    border: showCalendar ? "1px solid rgba(255, 255, 255, 0.15)" : "1px solid transparent",
+                    color: showCalendar ? "#fff" : "rgba(255, 255, 255, 0.75)",
                     fontSize: 11.5,
                     fontWeight: 600,
-                    padding: "4px 9px",
-                    borderRadius: 6,
+                    padding: "8px 16px",
+                    borderRadius: 8,
                     cursor: "pointer",
                     display: "flex",
                     alignItems: "center",
@@ -502,22 +530,31 @@ export default function StudyPlan() {
                 )}
               </div>
 
-              {/* Divider */}
-              <span style={{ width: 1, height: 18, background: "rgba(255,255,255,0.15)", flexShrink: 0 }} />
-
               {/* Focus Mode */}
               <div ref={focusRef} style={{ position: "relative" }}>
                 <button
                   className="sp-toolbar-btn"
                   onClick={() => { setShowFocusTimer(!showFocusTimer); setShowCalendar(false); }}
                   style={{
-                    background: focusActive ? "rgba(16,185,129,0.15)" : "transparent",
-                    border: focusActive ? "1px solid rgba(16,185,129,0.35)" : "none",
-                    color: focusActive ? "#6EE7B7" : "rgba(255,255,255,0.75)",
+                    background: focusActive
+                      ? "rgba(16,185,129,0.15)"
+                      : showFocusTimer
+                        ? "rgba(255, 255, 255, 0.10)"
+                        : "transparent",
+                    border: focusActive
+                      ? "1px solid rgba(16,185,129,0.35)"
+                      : showFocusTimer
+                        ? "1px solid rgba(255, 255, 255, 0.15)"
+                        : "1px solid transparent",
+                    color: focusActive
+                      ? "#6EE7B7"
+                      : showFocusTimer
+                        ? "#fff"
+                        : "rgba(255, 255, 255, 0.75)",
                     fontSize: 11.5,
                     fontWeight: 600,
-                    padding: "4px 9px",
-                    borderRadius: 6,
+                    padding: "8px 16px",
+                    borderRadius: 8,
                     cursor: "pointer",
                     display: "flex",
                     alignItems: "center",
@@ -525,7 +562,7 @@ export default function StudyPlan() {
                     outline: "none",
                   }}
                 >
-                  🧘 {focusActive ? `${formatFocusTime(focusTimeLeft)}` : "Focus Mode"}
+                  🧘 {focusActive ? `${formatFocusTime(focusTimeLeft)}` : "FocusmMode"}
                 </button>
 
                 {showFocusTimer && (
@@ -651,7 +688,7 @@ export default function StudyPlan() {
       </div>
 
       {/* ── CONTENT AREA ── */}
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: "24px 20px 48px" }}>
+      <div className="sp-container" style={{ paddingTop: 24, paddingBottom: 48 }}>
 
         {tab === "calendar" && (
           <OfficialTimetable

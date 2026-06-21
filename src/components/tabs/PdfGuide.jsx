@@ -1,6 +1,20 @@
 export default function PdfGuide() {
   return (
     <div>
+      <style>{`
+        .pdf-cards-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+        @media (min-width: 1025px) {
+          .pdf-cards-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            align-items: start;
+          }
+        }
+      `}</style>
       <div style={{ background: "#F5F0E6", border: "1px solid #D9CBA8", borderRadius: 10, padding: "12px 16px", marginBottom: 16, fontSize: 13, color: "#6B5B3A" }}>
         <strong>4 of your 10 modules have a dedicated Hands-On PDF.</strong> The other 6 are GitHub-repo-only or SkillSpring-only (Cognizant's handbook points you to their public repo + SkillSpring courses instead of a PDF for those). The table below tells you exactly which is which — check this BEFORE you start a module so you're not hunting for a PDF that doesn't exist.
       </div>
@@ -54,7 +68,8 @@ export default function PdfGuide() {
       <div style={{ background: "#F5F0E6", border: "1px solid #D9CBA8", borderRadius: 10, padding: "12px 16px", marginBottom: 20, fontSize: 13, color: "#6B5B3A" }}>
         <strong>You have 4 Hands-On PDFs.</strong> Each maps to exactly one module. The table below shows each PDF's hands-on exercises.
       </div>
-      {[
+      <div className="pdf-cards-grid">
+        {[
         { pdf: "DatabaseIntegration_HandsOn.pdf", module: "Module 3 — Database Integration", accent: "#3E7CB1", dates: "Official: 2 days (handbook) / PDF itself: 4 days", items: [
           ["Hands-On 1","Schema Design & DDL","Beginner"],
           ["Hands-On 2","SQL Queries, JOINs & Aggregations","Beginner"],
@@ -117,6 +132,7 @@ export default function PdfGuide() {
           })}
         </div>
       ))}
+      </div>
     </div>
   );
 }
