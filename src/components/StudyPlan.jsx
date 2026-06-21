@@ -286,10 +286,10 @@ export default function StudyPlan() {
         }
         .sp-tab-btn:hover {
           color: #fff !important;
-          background: rgba(129,140,248,0.15) !important;
-          border-color: rgba(129,140,248,0.6) !important;
+          background: rgba(45,212,191,0.15) !important;
+          border-color: rgba(45,212,191,0.6) !important;
           transform: translateY(-2px);
-          box-shadow: 0 6px 18px rgba(99,102,241,0.22);
+          box-shadow: 0 6px 18px rgba(45,212,191,0.25);
         }
         .sp-tab-btn:active {
           transform: translateY(0);
@@ -676,21 +676,21 @@ export default function StudyPlan() {
                     padding: "9px 14px",
                     textAlign: "center",
                     border: active
-                      ? "1.5px solid #818CF8"
+                      ? "1.5px solid #2DD4BF"
                       : "1.5px solid rgba(255,255,255,0.18)",
                     borderRadius: 8,
                     background: active
-                      ? "rgba(99,102,241,0.18)"
+                      ? "rgba(45,212,191,0.18)"
                       : "rgba(255,255,255,0.05)",
                     cursor: "pointer",
                     fontSize: 12.5,
                     fontWeight: active ? 700 : 500,
-                    color: active ? "#C7D2FE" : "rgba(255,255,255,0.70)",
+                    color: active ? "#CCFBF1" : "rgba(255,255,255,0.70)",
                     letterSpacing: "0.1px",
                     outline: "none",
                     whiteSpace: "nowrap",
                     boxShadow: active
-                      ? "0 4px 14px rgba(99,102,241,0.25), inset 0 1px 0 rgba(255,255,255,0.08)"
+                      ? "0 4px 14px rgba(45,212,191,0.25), inset 0 1px 0 rgba(255,255,255,0.08)"
                       : "inset 0 1px 0 rgba(255,255,255,0.04)",
                   }}
                 >
