@@ -49,8 +49,8 @@ export default function TaskChecklist({ checked, toggle, openWeeks, toggleWeek, 
                   <div style={{ fontSize: 14, color: "#CBD5E1", marginTop: 2 }}>{isOpen ? "▲" : "▼"}</div>
                 </div>
               </div>
-              <div style={{ height: 3, background: "#F1F5F9" }}>
-                <div style={{ height: 3, background: ws.pct === 100 ? "#16A34A" : week.accent, width: `${ws.pct}%`, transition: "width 0.4s", borderRadius: "0 3px 3px 0" }} />
+              <div style={{ height: 8, background: "#CBD5E1", overflow: "hidden" }}>
+                <div style={{ height: "100%", background: ws.pct === 100 ? "#16A34A" : week.accent, width: `${ws.pct}%`, transition: "width 0.4s" }} />
               </div>
             </button>
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CONSTRUCTS, OFFICIAL_TOTAL } from "../../data/constructs";
+import { CONSTRUCTS } from "../../data/constructs";
 
 function isSubTopicDone(st, linksDone) {
   return st.links && st.links.every(l => linksDone[l.id]);
@@ -70,21 +70,46 @@ export default function OfficialTimetable({ modsDone, toggleModDone, linksDone, 
           box-shadow: 0 6px 12px rgba(107,91,58,0.18) !important;
           border-color: #D9CBA8 !important;
         }
+        .construct-card {
+          background: #fff;
+          border-radius: 14px;
+          border: 1.5px solid var(--c-border);
+          margin-bottom: 20px;
+          overflow: hidden;
+          transition: border-color 280ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1), transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .construct-card:hover {
+          border-color: #1E293B;
+          box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15), 0 0 0 1px rgba(15, 23, 42, 0.04);
+          transform: translateY(-2px);
+        }
         .module-row {
           border: 1px solid transparent;
           border-bottom-color: #ECEEF1;
           border-radius: 8px;
           padding: 14px 8px;
-          transition: border-color 180ms ease, box-shadow 180ms ease, background-color 350ms ease;
+          transition: border-color 220ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 220ms cubic-bezier(0.4, 0, 0.2, 1), transform 220ms cubic-bezier(0.4, 0, 0.2, 1), background-color 350ms ease;
           margin-bottom: 1px;
         }
         .module-row:hover {
-          border-color: var(--c-accent);
-          box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+          border-color: #334155;
+          box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(15, 23, 42, 0.03);
+          transform: translateY(-1.5px);
         }
         .module-row:last-child {
           border-bottom-color: transparent;
           margin-bottom: 0;
+        }
+        .subtopic-card {
+          margin-bottom: 8px;
+          border-radius: 8px;
+          padding: 8px 10px;
+          transition: border-color 220ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 220ms cubic-bezier(0.4, 0, 0.2, 1), transform 220ms cubic-bezier(0.4, 0, 0.2, 1), background-color 350ms ease;
+        }
+        .subtopic-card:hover {
+          border-color: #334155 !important;
+          box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12) !important;
+          transform: translateY(-1.5px) !important;
         }
       `}</style>
 
@@ -92,20 +117,19 @@ export default function OfficialTimetable({ modsDone, toggleModDone, linksDone, 
         <strong>All details are given by the Cognizant Handbook.</strong> If you have any doubts, you can click the <strong>HandBook</strong> tab to verify with the PDF. No custom instructions are added; everything in this app is designed exactly as per the Handbook's instructions.
       </div>
 
-      <div style={{ marginBottom: 18 }}>
-        <div style={{ background: "#fff", border: "1px solid #E2E8F0", borderRadius: 10, padding: "10px 14px", textAlign: "center" }}>
-          <div style={{ fontSize: 10, color: "#475569", fontWeight: 700, textTransform: "uppercase" }}>Cognizant Official Duration</div>
-          <div style={{ fontSize: 20, fontWeight: 800, color: "#1E293B" }}>{OFFICIAL_TOTAL} days</div>
-          <div style={{ fontSize: 10, color: "#64748B" }}>≈ 7 weeks @ 10-12 hrs/wk</div>
-        </div>
-      </div>
 
       {CONSTRUCTS.map((c, ci) => {
         const cModsDone = c.modules.filter(m => modsDone[m.id]).length;
         const isConstructOpen = !!openConstructs[c.id];
 
         return (
-          <div key={c.id} style={{ background: "#fff", borderRadius: 14, border: `1.5px solid ${c.color}28`, marginBottom: 20, overflow: "hidden", transition: "all 0.2s ease" }}>
+          <div 
+            key={c.id} 
+            className="construct-card"
+            style={{ 
+              "--c-border": `${c.color}28` 
+            }}
+          >
             
             {/* Clickable Construct Header */}
             <div 
@@ -204,7 +228,7 @@ export default function OfficialTimetable({ modsDone, toggleModDone, linksDone, 
                                 {stats.pct}% ({stats.done}/{stats.total})
                               </span>
                             </div>
-                            <div style={{ height: 4, background: "#E2E8F0", borderRadius: 100, overflow: "hidden" }}>
+                            <div style={{ height: 8, background: "#CBD5E1", borderRadius: 100, overflow: "hidden", border: "1px solid rgba(0,0,0,0.06)" }}>
                               <div 
                                 style={{ 
                                   height: "100%", 
@@ -234,7 +258,14 @@ export default function OfficialTimetable({ modsDone, toggleModDone, linksDone, 
                                 {m.subTopics.map(st => {
                                   const stDone = isSubTopicDone(st, linksDone);
                                   return (
-                                    <div key={st.id} style={{ marginBottom: 8, background: stDone ? "#F0FDF4" : "#F8FAFC", border: `1px solid ${stDone ? "#BBF7D0" : "#E2E8F0"}`, borderRadius: 8, padding: "8px 10px" }}>
+                                    <div 
+                                      key={st.id} 
+                                      className="subtopic-card"
+                                      style={{ 
+                                        background: stDone ? "#F0FDF4" : "#F8FAFC", 
+                                        border: `1px solid ${stDone ? "#BBF7D0" : "#E2E8F0"}` 
+                                      }}
+                                    >
                                       <div style={{ fontSize: 11.5, fontWeight: 700, color: stDone ? "#16A34A" : "#334155", marginBottom: 5, display: "flex", alignItems: "center", gap: 5 }}>
                                         {stDone ? "✓ " : ""}{st.heading}
                                       </div>

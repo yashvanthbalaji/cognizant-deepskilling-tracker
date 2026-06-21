@@ -14,7 +14,7 @@ export default function StudyPlan() {
   const [linksDone, setLinksDone] = useState(() => { try { return JSON.parse(localStorage.getItem("dn5_linksDone")) || {}; } catch { return {}; } });
   const [loadingDb, setLoadingDb] = useState(true);
   const [syncStatus, setSyncStatus] = useState("synced"); // "synced", "syncing", "error"
-  
+
   const [showCalendar, setShowCalendar] = useState(false);
   const [calMonth, setCalMonth] = useState(new Date().getMonth());
   const [calYear, setCalYear] = useState(new Date().getFullYear());
@@ -250,9 +250,9 @@ export default function StudyPlan() {
   };
 
   // ── Auto-save progress to localStorage ──────────────────────
-  useEffect(() => { localStorage.setItem("dn5_modsDone",   JSON.stringify(modsDone));  }, [modsDone]);
-  useEffect(() => { localStorage.setItem("dn5_linksDone",  JSON.stringify(linksDone)); }, [linksDone]);
-  useEffect(() => { localStorage.setItem("dn5_tab",        tab);                       }, [tab]);
+  useEffect(() => { localStorage.setItem("dn5_modsDone", JSON.stringify(modsDone)); }, [modsDone]);
+  useEffect(() => { localStorage.setItem("dn5_linksDone", JSON.stringify(linksDone)); }, [linksDone]);
+  useEffect(() => { localStorage.setItem("dn5_tab", tab); }, [tab]);
 
   const userInitials = auth.currentUser?.email
     ? auth.currentUser.email.slice(0, 2).toUpperCase()
@@ -271,8 +271,8 @@ export default function StudyPlan() {
   const syncDot = syncStatus === "syncing"
     ? { bg: "#F59E0B", title: "Syncing…" }
     : syncStatus === "error"
-    ? { bg: "#EF4444", title: "Sync error" }
-    : { bg: "#22C55E", title: "All changes saved" };
+      ? { bg: "#EF4444", title: "Sync error" }
+      : { bg: "#22C55E", title: "All changes saved" };
 
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", background: "#F7F6F3", minHeight: "100vh" }}>
@@ -438,156 +438,156 @@ export default function StudyPlan() {
               flexShrink: 0,
             }}>
 
-            {/* Calendar */}
-            <div ref={calendarRef} style={{ position: "relative" }}>
-              <button
-                className="sp-toolbar-btn"
-                onClick={() => {
-                  const today = new Date();
-                  setCalMonth(today.getMonth());
-                  setCalYear(today.getFullYear());
-                  setShowCalendar(!showCalendar);
-                  setShowFocusTimer(false);
-                }}
-                style={{
-                  background: "transparent",
-                  border: "none",
-                  color: "rgba(255,255,255,0.75)",
-                  fontSize: 11.5,
-                  fontWeight: 600,
-                  padding: "4px 9px",
-                  borderRadius: 6,
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 5,
-                  outline: "none",
-                }}
-              >
-                📅 {new Date().toLocaleDateString("en-US", { weekday: "short", day: "numeric", month: "short" })}
-              </button>
+              {/* Calendar */}
+              <div ref={calendarRef} style={{ position: "relative" }}>
+                <button
+                  className="sp-toolbar-btn"
+                  onClick={() => {
+                    const today = new Date();
+                    setCalMonth(today.getMonth());
+                    setCalYear(today.getFullYear());
+                    setShowCalendar(!showCalendar);
+                    setShowFocusTimer(false);
+                  }}
+                  style={{
+                    background: "transparent",
+                    border: "none",
+                    color: "rgba(255,255,255,0.75)",
+                    fontSize: 11.5,
+                    fontWeight: 600,
+                    padding: "4px 9px",
+                    borderRadius: 6,
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 5,
+                    outline: "none",
+                  }}
+                >
+                  📅 {new Date().toLocaleDateString("en-US", { weekday: "short", day: "numeric", month: "short" })}
+                </button>
 
-              {showCalendar && (
-                <div style={{
-                  position: "absolute",
-                  top: "calc(100% + 8px)",
-                  left: 0,
-                  background: "#fff",
-                  color: "#1E293B",
-                  borderRadius: 12,
-                  boxShadow: "0 12px 28px -4px rgba(0,0,0,0.18)",
-                  border: "1px solid #E2E8F0",
-                  padding: 16,
-                  width: 256,
-                  zIndex: 1000,
-                }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-                    <button onClick={() => { if (calMonth === 0) { setCalMonth(11); setCalYear(calYear - 1); } else { setCalMonth(calMonth - 1); } }}
-                      style={{ border: "none", background: "none", cursor: "pointer", fontSize: 13, fontWeight: 700, color: "#64748B", padding: "2px 6px" }}>◀</button>
-                    <span style={{ fontSize: 12, fontWeight: 800, color: "#0F172A" }}>
-                      {new Date(calYear, calMonth).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
-                    </span>
-                    <button onClick={() => { if (calMonth === 11) { setCalMonth(0); setCalYear(calYear + 1); } else { setCalMonth(calMonth + 1); } }}
-                      style={{ border: "none", background: "none", cursor: "pointer", fontSize: 13, fontWeight: 700, color: "#64748B", padding: "2px 6px" }}>▶</button>
+                {showCalendar && (
+                  <div style={{
+                    position: "absolute",
+                    top: "calc(100% + 8px)",
+                    left: 0,
+                    background: "#fff",
+                    color: "#1E293B",
+                    borderRadius: 12,
+                    boxShadow: "0 12px 28px -4px rgba(0,0,0,0.18)",
+                    border: "1px solid #E2E8F0",
+                    padding: 16,
+                    width: 256,
+                    zIndex: 1000,
+                  }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                      <button onClick={() => { if (calMonth === 0) { setCalMonth(11); setCalYear(calYear - 1); } else { setCalMonth(calMonth - 1); } }}
+                        style={{ border: "none", background: "none", cursor: "pointer", fontSize: 13, fontWeight: 700, color: "#64748B", padding: "2px 6px" }}>◀</button>
+                      <span style={{ fontSize: 12, fontWeight: 800, color: "#0F172A" }}>
+                        {new Date(calYear, calMonth).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+                      </span>
+                      <button onClick={() => { if (calMonth === 11) { setCalMonth(0); setCalYear(calYear + 1); } else { setCalMonth(calMonth + 1); } }}
+                        style={{ border: "none", background: "none", cursor: "pointer", fontSize: 13, fontWeight: 700, color: "#64748B", padding: "2px 6px" }}>▶</button>
+                    </div>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 4, textAlign: "center", marginBottom: 6 }}>
+                      {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map(d => (
+                        <span key={d} style={{ fontSize: 10, fontWeight: 700, color: "#94A3B8" }}>{d}</span>
+                      ))}
+                    </div>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 4, textAlign: "center" }}>
+                      {renderCalendarDays()}
+                    </div>
                   </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 4, textAlign: "center", marginBottom: 6 }}>
-                    {["Su","Mo","Tu","We","Th","Fr","Sa"].map(d => (
-                      <span key={d} style={{ fontSize: 10, fontWeight: 700, color: "#94A3B8" }}>{d}</span>
-                    ))}
-                  </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 4, textAlign: "center" }}>
-                    {renderCalendarDays()}
-                  </div>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
 
-            {/* Divider */}
-            <span style={{ width: 1, height: 18, background: "rgba(255,255,255,0.15)", flexShrink: 0 }} />
+              {/* Divider */}
+              <span style={{ width: 1, height: 18, background: "rgba(255,255,255,0.15)", flexShrink: 0 }} />
 
-            {/* Focus Mode */}
-            <div ref={focusRef} style={{ position: "relative" }}>
-              <button
-                className="sp-toolbar-btn"
-                onClick={() => { setShowFocusTimer(!showFocusTimer); setShowCalendar(false); }}
-                style={{
-                  background: focusActive ? "rgba(16,185,129,0.15)" : "transparent",
-                  border: focusActive ? "1px solid rgba(16,185,129,0.35)" : "none",
-                  color: focusActive ? "#6EE7B7" : "rgba(255,255,255,0.75)",
-                  fontSize: 11.5,
-                  fontWeight: 600,
-                  padding: "4px 9px",
-                  borderRadius: 6,
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 5,
-                  outline: "none",
-                }}
-              >
-                🧘 {focusActive ? `${formatFocusTime(focusTimeLeft)}` : "Focus"}
-              </button>
+              {/* Focus Mode */}
+              <div ref={focusRef} style={{ position: "relative" }}>
+                <button
+                  className="sp-toolbar-btn"
+                  onClick={() => { setShowFocusTimer(!showFocusTimer); setShowCalendar(false); }}
+                  style={{
+                    background: focusActive ? "rgba(16,185,129,0.15)" : "transparent",
+                    border: focusActive ? "1px solid rgba(16,185,129,0.35)" : "none",
+                    color: focusActive ? "#6EE7B7" : "rgba(255,255,255,0.75)",
+                    fontSize: 11.5,
+                    fontWeight: 600,
+                    padding: "4px 9px",
+                    borderRadius: 6,
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 5,
+                    outline: "none",
+                  }}
+                >
+                  🧘 {focusActive ? `${formatFocusTime(focusTimeLeft)}` : "Focus Mode"}
+                </button>
 
-              {showFocusTimer && (
-                <div style={{
-                  position: "absolute",
-                  top: "calc(100% + 8px)",
-                  left: 0,
-                  background: "#fff",
-                  color: "#1E293B",
-                  borderRadius: 12,
-                  boxShadow: "0 12px 28px -4px rgba(0,0,0,0.18)",
-                  border: "1px solid #E2E8F0",
-                  padding: "16px 18px",
-                  width: 230,
-                  zIndex: 1000,
-                  textAlign: "center",
-                }}>
-                  <h4 style={{ fontSize: 12, fontWeight: 700, margin: "0 0 10px", color: "#334155", textTransform: "uppercase", letterSpacing: 0.8 }}>
-                    Focus Timer
-                  </h4>
-                  <div style={{ fontSize: 38, fontWeight: 900, fontFamily: "monospace", color: focusActive ? "#4F46E5" : "#334155", margin: "8px 0 14px", letterSpacing: 2 }}>
-                    {formatFocusTime(focusTimeLeft)}
+                {showFocusTimer && (
+                  <div style={{
+                    position: "absolute",
+                    top: "calc(100% + 8px)",
+                    left: 0,
+                    background: "#fff",
+                    color: "#1E293B",
+                    borderRadius: 12,
+                    boxShadow: "0 12px 28px -4px rgba(0,0,0,0.18)",
+                    border: "1px solid #E2E8F0",
+                    padding: "16px 18px",
+                    width: 230,
+                    zIndex: 1000,
+                    textAlign: "center",
+                  }}>
+                    <h4 style={{ fontSize: 12, fontWeight: 700, margin: "0 0 10px", color: "#334155", textTransform: "uppercase", letterSpacing: 0.8 }}>
+                      Focus Timer
+                    </h4>
+                    <div style={{ fontSize: 38, fontWeight: 900, fontFamily: "monospace", color: focusActive ? "#4F46E5" : "#334155", margin: "8px 0 14px", letterSpacing: 2 }}>
+                      {formatFocusTime(focusTimeLeft)}
+                    </div>
+                    {!focusActive && (
+                      <>
+                        <div style={{ display: "flex", justifyContent: "center", gap: 5, marginBottom: 10 }}>
+                          {[15, 25, 50].map(mins => (
+                            <button key={mins} onClick={() => { setFocusDuration(mins * 60); setFocusTimeLeft(mins * 60); }}
+                              style={{
+                                fontSize: 11, fontWeight: 700, padding: "3px 9px",
+                                border: "1px solid #E2E8F0",
+                                background: focusDuration === mins * 60 ? "#EEF2FF" : "#fff",
+                                borderRadius: 6, cursor: "pointer",
+                                color: focusDuration === mins * 60 ? "#4F46E5" : "#64748B",
+                              }}>
+                              {mins}m
+                            </button>
+                          ))}
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginBottom: 12 }}>
+                          <span style={{ fontSize: 11, color: "#94A3B8" }}>Custom:</span>
+                          <input type="number" min="1" max="180"
+                            defaultValue={Math.floor(focusDuration / 60)}
+                            onChange={(e) => { const v = parseInt(e.target.value); if (v > 0) { setFocusDuration(v * 60); setFocusTimeLeft(v * 60); } }}
+                            style={{ width: 44, padding: "3px 5px", fontSize: 11, border: "1px solid #E2E8F0", borderRadius: 5, textAlign: "center", outline: "none" }} />
+                          <span style={{ fontSize: 11, color: "#94A3B8" }}>min</span>
+                        </div>
+                      </>
+                    )}
+                    <div style={{ display: "flex", gap: 7 }}>
+                      <button onClick={() => setFocusActive(!focusActive)}
+                        style={{ flex: 1, fontSize: 12, fontWeight: 700, padding: "7px 0", background: focusActive ? "#F59E0B" : "#4F46E5", color: "#fff", border: "none", borderRadius: 7, cursor: "pointer" }}>
+                        {focusActive ? "Pause" : "Start"}
+                      </button>
+                      <button onClick={() => { setFocusActive(false); setFocusTimeLeft(focusDuration); }}
+                        style={{ fontSize: 12, fontWeight: 700, padding: "7px 12px", background: "#F1F5F9", color: "#64748B", border: "1px solid #E2E8F0", borderRadius: 7, cursor: "pointer" }}>
+                        ↺
+                      </button>
+                    </div>
                   </div>
-                  {!focusActive && (
-                    <>
-                      <div style={{ display: "flex", justifyContent: "center", gap: 5, marginBottom: 10 }}>
-                        {[15, 25, 50].map(mins => (
-                          <button key={mins} onClick={() => { setFocusDuration(mins * 60); setFocusTimeLeft(mins * 60); }}
-                            style={{
-                              fontSize: 11, fontWeight: 700, padding: "3px 9px",
-                              border: "1px solid #E2E8F0",
-                              background: focusDuration === mins * 60 ? "#EEF2FF" : "#fff",
-                              borderRadius: 6, cursor: "pointer",
-                              color: focusDuration === mins * 60 ? "#4F46E5" : "#64748B",
-                            }}>
-                            {mins}m
-                          </button>
-                        ))}
-                      </div>
-                      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, marginBottom: 12 }}>
-                        <span style={{ fontSize: 11, color: "#94A3B8" }}>Custom:</span>
-                        <input type="number" min="1" max="180"
-                          defaultValue={Math.floor(focusDuration / 60)}
-                          onChange={(e) => { const v = parseInt(e.target.value); if (v > 0) { setFocusDuration(v * 60); setFocusTimeLeft(v * 60); } }}
-                          style={{ width: 44, padding: "3px 5px", fontSize: 11, border: "1px solid #E2E8F0", borderRadius: 5, textAlign: "center", outline: "none" }} />
-                        <span style={{ fontSize: 11, color: "#94A3B8" }}>min</span>
-                      </div>
-                    </>
-                  )}
-                  <div style={{ display: "flex", gap: 7 }}>
-                    <button onClick={() => setFocusActive(!focusActive)}
-                      style={{ flex: 1, fontSize: 12, fontWeight: 700, padding: "7px 0", background: focusActive ? "#F59E0B" : "#4F46E5", color: "#fff", border: "none", borderRadius: 7, cursor: "pointer" }}>
-                      {focusActive ? "Pause" : "Start"}
-                    </button>
-                    <button onClick={() => { setFocusActive(false); setFocusTimeLeft(focusDuration); }}
-                      style={{ fontSize: 12, fontWeight: 700, padding: "7px 12px", background: "#F1F5F9", color: "#64748B", border: "1px solid #E2E8F0", borderRadius: 7, cursor: "pointer" }}>
-                      ↺
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
             </div>
           </div>{/* ── end TITLE ROW ── */}
 
@@ -597,17 +597,18 @@ export default function StudyPlan() {
               <span style={{ fontSize: 11.5, color: "rgba(255,255,255,0.80)", fontWeight: 500 }}>
                 {calDone} of {allModuleIds.length} modules complete
               </span>
-              <span style={{ fontSize: 13, fontWeight: 700, color: calPct === 100 ? "#34D399" : "rgba(255,255,255,0.9)" }}>
+              <span style={{ fontSize: 13, fontWeight: 800, color: calPct === 100 ? "#10B981" : "#2DD4BF" }}>
                 {calPct}%
               </span>
             </div>
-            <div style={{ background: "rgba(255,255,255,0.1)", borderRadius: 100, height: 5, overflow: "hidden" }}>
+            <div style={{ background: "#0B1220", borderRadius: 100, height: 10, overflow: "hidden", border: "1px solid rgba(255,255,255,0.12)" }}>
               <div style={{
                 height: "100%",
                 borderRadius: 100,
-                background: calPct === 100 ? "#34D399" : "linear-gradient(90deg, #818CF8 0%, #6366F1 100%)",
+                background: calPct === 100 ? "#10B981" : "linear-gradient(90deg, #6366F1 0%, #2DD4BF 55%, #10B981 100%)",
                 width: `${calPct}%`,
-                transition: "width 0.45s ease",
+                transition: "width 0.45s cubic-bezier(0.4, 0, 0.2, 1)",
+                boxShadow: calPct === 100 ? "0 0 10px rgba(16, 185, 129, 0.5)" : "0 0 10px rgba(45, 212, 191, 0.5)",
               }} />
             </div>
           </div>
