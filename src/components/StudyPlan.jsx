@@ -293,9 +293,10 @@ export default function StudyPlan() {
         .sp-avatar-btn:hover { box-shadow: 0 0 0 3px rgba(255,255,255,0.35); }
         .sp-container {
           width: 100%;
-          margin: 0 auto;
-          padding-left: 20px;
-          padding-right: 20px;
+          margin-left: 0;
+          margin-right: auto;
+          padding-left: 24px;
+          padding-right: 24px;
           box-sizing: border-box;
           max-width: 1400px;
         }
