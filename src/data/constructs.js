@@ -25,12 +25,12 @@ export const CONSTRUCTS = [
           {
             id: "m1-st2", heading: "Commonly Used Design Patterns",
             links: [
-              { id: "m1-st2-l1", label: "Design Patterns Overview — Medium", url: "https://medium.com/@softwaretechsolution/design-pattern-81ef65829de2" },
+              { id: "m1-st2-l1", label: "Design Patterns Overview — Medium", url: "https://medium.com/@softwaretechsolution/designpattern-81ef65829de2" },
             ],
           },
         ],
         quizzes: [
-          { id: "m1-q1", label: "Design Patterns Quiz — JavaGuides", url: "https://www.javaguides.net/2023/07/design-patterns-quiz.html" },
+          { id: "m1-q1", label: "Design Patterns Quiz — JavaGuides", url: " https://www.javaguides.net/2023/07/design-patterns-quiz.html" },
         ],
       },
       {
@@ -42,7 +42,7 @@ export const CONSTRUCTS = [
           {
             id: "m2-st1", heading: "Analysis of Algorithms",
             links: [
-              { id: "m2-st1-l1", label: "Analysis of Algorithms", url: "https://www.javaguides.net/2023/07/design-patterns-quiz.html" },
+              { id: "m2-st1-l1", label: "Analysis of Algorithms", url: "https://www.geeksforgeeks.org/dsa/analysis-of-algorithms/" },
             ],
           },
           {
@@ -403,7 +403,7 @@ export const CONSTRUCTS = [
           { id: "m6-q3", label: "React Quiz — W3Schools", url: "https://www.w3schools.com/REACT/react_quiz.asp" },
           { id: "m6-q4", label: "AngularJS Quiz — W3Schools", url: "https://www.w3schools.com/angular/angular_quiz.asp" },
           { id: "m6-q5", label: "Vue.js Quiz — W3Schools", url: "https://www.w3schools.com/vue/vue_quiz.php" },
-          { id: "m6-q6", label: "Responsive Web Design Quiz — freeCodeCamp", url: "https://www.freecodecamp.org/learn/responsive-web-design-v9/quiz-responsive-webdesign/quiz-responsive-web-design" },
+          { id: "m6-q6", label: "Responsive Web Design Quiz — freeCodeCamp", url: "https://www.freecodecamp.org/learn/responsive-web-design-v9/quiz-responsive-web-design/quiz-responsive-web-design" },
         ],
       },
       {

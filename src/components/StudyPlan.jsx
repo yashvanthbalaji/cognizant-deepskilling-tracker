@@ -5,7 +5,7 @@ import { CONSTRUCTS, OFFICIAL_TOTAL } from "../data/constructs";
 import OfficialTimetable from "./tabs/OfficialTimetable";
 import PdfGuide from "./tabs/PdfGuide";
 import HandBookTab from "./tabs/HandBookTab";
-import GithubTab from "./tabs/GithubTab";
+import MasterclassTab from "./tabs/MasterclassTab";
 
 export default function StudyPlan() {
   const [tab, setTab] = useState(() => { try { return localStorage.getItem("dn5_tab") || "calendar"; } catch(e) { return "calendar"; } });
@@ -86,7 +86,7 @@ export default function StudyPlan() {
               ["calendar", "📅 Official Timetable"],
               ["pdfmap", "📘 PDF Guide"],
               ["handbook", "📘 HandBook"],
-              ["github", "🐙 GitHub"]
+              ["masterclass", "🎓 Masterclass Session"]
             ].map(([id, label]) => (
               <button key={id} onClick={() => setTab(id)} style={tabStyle(tab === id)}>{label}</button>
             ))}
@@ -116,8 +116,8 @@ export default function StudyPlan() {
           <HandBookTab />
         )}
 
-        {tab === "github" && (
-          <GithubTab />
+        {tab === "masterclass" && (
+          <MasterclassTab />
         )}
       </div>
     </div>
