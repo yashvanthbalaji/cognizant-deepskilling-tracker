@@ -1,4 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 import { CONSTRUCTS, OFFICIAL_TOTAL } from "../data/constructs";
 import OfficialTimetable from "./tabs/OfficialTimetable";
 import PdfGuide from "./tabs/PdfGuide";
@@ -53,8 +55,21 @@ export default function StudyPlan() {
       {/* ── HEADER ── */}
       <div style={{ background: "linear-gradient(135deg,#1E3A5F 0%,#1a56db 55%,#7C3AED 100%)", color: "#fff", padding: "22px 16px 0" }}>
         <div style={{ maxWidth: 860, margin: "0 auto" }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.5, opacity: 0.65, textTransform: "uppercase", marginBottom: 4 }}>COGNIZANT DIGITAL NURTURE 5.0 · OFFICIAL MODULE-WISE TIMETABLE</div>
-          <h1 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 2px", lineHeight: 1.2 }}>Python Full Stack Engineer — 10 Modules, 4 FSE Constructs</h1>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 16, marginBottom: 12 }}>
+            <div>
+              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1.5, opacity: 0.65, textTransform: "uppercase", marginBottom: 4 }}>COGNIZANT DIGITAL NURTURE 5.0 · OFFICIAL MODULE-WISE TIMETABLE</div>
+              <h1 style={{ fontSize: 20, fontWeight: 800, margin: "0 0 2px", lineHeight: 1.2 }}>Python Full Stack Engineer — 10 Modules, 4 FSE Constructs</h1>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 6, flexShrink: 0 }}>
+              <span style={{ fontSize: 11, background: "rgba(255, 255, 255, 0.15)", padding: "4px 10px", borderRadius: 100, fontWeight: 600 }}>👤 {auth.currentUser?.email}</span>
+              <button 
+                onClick={() => signOut(auth)} 
+                style={{ fontSize: 11, background: "#EF4444", color: "#fff", border: "none", padding: "5px 12px", borderRadius: 6, fontWeight: 700, cursor: "pointer", transition: "all 0.2s" }}
+              >
+                Sign Out
+              </button>
+            </div>
+          </div>
           <p style={{ fontSize: 12, opacity: 0.7, margin: "0 0 16px" }}>Per Handbook: {OFFICIAL_TOTAL} days (~7 weeks) — official Cognizant durations only</p>
 
           <div style={{ background: "rgba(255,255,255,0.12)", borderRadius: 8, height: 8, marginBottom: 6 }}>
